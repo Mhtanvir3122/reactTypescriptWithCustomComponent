@@ -5,9 +5,10 @@ import TextArea from "../components/UI/input/textArea";
 import ReactPaginate from "react-paginate";
 import "../pages/style.scss";
 // import Card from "../components/UI/card/Card";
-import { Card } from 'react-bootstrap';
+// import { Card } from 'react-bootstrap';
 
 import Button from "../components/UI/button/Button";
+import Card from "../components/UI/card/Card";
 const ITEMS_PER_PAGE = 5;
 
 // Define the Item type
@@ -104,8 +105,7 @@ const LocalStorageCRUD = () => {
 
       <form onSubmit={(handleSubmit(onSubmit))}>
 
-      <Card  style={{ width: '100%' }}>
-      <Card.Body>
+      <Card>
         
    
 
@@ -168,7 +168,6 @@ const LocalStorageCRUD = () => {
 
         
         </div>
-        </Card.Body>
         </Card>
    
       </form>
