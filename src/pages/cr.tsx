@@ -176,7 +176,7 @@ const LocalStorageCRUD = () => {
       </div>
 
 
-      <div className="mb-6">
+      <div >
       <table >
         <thead>
           <tr>

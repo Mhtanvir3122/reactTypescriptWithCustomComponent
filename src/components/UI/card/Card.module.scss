@@ -2,6 +2,7 @@
 
 .card {
   // @include flex(stretch, flex-start);
+  margin-bottom: 2rem;
   background-color: var(--bgc);
   border-radius: $mediumBorderRadius;
   box-shadow: $mainBoxShadow;
