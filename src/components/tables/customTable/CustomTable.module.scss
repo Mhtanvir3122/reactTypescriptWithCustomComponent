@@ -35,12 +35,12 @@ th {
   color: var(--card-bgc);
   text-align: left;
   white-space: wrap;
-  &:first-child {
-    border-top-left-radius: $largeBorderRadius;
-  }
-  &:last-child {
-    border-top-right-radius: $largeBorderRadius;
-  }
+  // &:first-child {
+  //   border-top-left-radius: $largeBorderRadius;
+  // }
+  // &:last-child {
+  //   border-top-right-radius: $largeBorderRadius;
+  // }
 }
 
 tr:nth-child(odd) {

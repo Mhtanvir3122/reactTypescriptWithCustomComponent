@@ -5,6 +5,8 @@ import MainLayout from "./layout/MainLayout";
 import AuthLayout from "./layout/AuthLayout";
 import LoadingSpinner from "./components/UI/loadingSpinner/LoadingSpinner";
 import "./scss/App.scss";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import LocalStorageCRUD from "./pages/cr";
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));

@@ -4,7 +4,9 @@ import Input2 from "../components/UI/input/Input2";
 import TextArea from "../components/UI/input/textArea";
 import ReactPaginate from "react-paginate";
 import "../pages/style.scss";
-import Card from "../components/UI/card/Card";
+// import Card from "../components/UI/card/Card";
+import { Card } from 'react-bootstrap';
+
 import Button from "../components/UI/button/Button";
 const ITEMS_PER_PAGE = 5;
 
@@ -97,12 +99,18 @@ const LocalStorageCRUD = () => {
       <h1>React TypeScript CRUD </h1>
       <br />
       <br />
-      <Card>
+      <div >
+      {/* <Card> */}
 
       <form onSubmit={(handleSubmit(onSubmit))}>
 
+      <Card  style={{ width: '100%' }}>
+      <Card.Body>
+        
+   
+
         <div className="row">
-          <div className="col-xl-3 col-md-6 col-sm-12">
+          <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
             <Input2
               register={register("title",)}
               label="Title"
@@ -112,13 +120,13 @@ const LocalStorageCRUD = () => {
               placeholder="Enter User Name"
               inputStyle={{
                 padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
-                minWidth: "300px"
+                minWidth: "100%"
               }}
 
             />
 
           </div>
-          <div className="col-xl-3 col-md-6 col-sm-12">
+          <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
             <Input2
               register={register("userName")}
               label="userName"
@@ -128,14 +136,14 @@ const LocalStorageCRUD = () => {
               placeholder="Enter User Name"
               inputStyle={{
                 padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
-                minWidth: "300px"
+                minWidth: "100%"
               }}
 
             />
 
           </div>
 
-          <div className="col-xl-3 col-md-6 col-sm-12">
+          <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
 
             <TextArea
               label="description"
@@ -154,15 +162,22 @@ const LocalStorageCRUD = () => {
               }} />
           </div>
         </div>
-        <div className="d-flex justify-content-end align-item-end">
-        <Button type="submit">{editId ? "Update" : "Add"}</Button>
-        </div>
+        <div className="d-flex justify-content-end mb-5">
+        
+    <Button type="submit">{editId ? "Update" : "Add"}</Button>
 
+        
+        </div>
+        </Card.Body>
+        </Card>
    
       </form>
-      </Card>
+      {/* </Card> */}
+     
+      </div>
 
-      <div>
+
+      <div className="mb-6">
       <table >
         <thead>
           <tr>

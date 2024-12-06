@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
 import { useTranslation } from "react-i18next";
 import { images } from "../../constants";
@@ -27,6 +27,7 @@ function Sidebar() {
     openSidebarHandler();
     loginCtx.toggleLogin();
   }
+  const navigate = useNavigate();
 
   useEffect(() => {
     const curPath = window.location.pathname.split("/")[1];
@@ -46,13 +47,15 @@ function Sidebar() {
       </div>
       <div className={classes.sidebar__menu}>
         {sidebarNav.map((nav, index) => (
-          <Link
-            to={nav.link}
+          <div
+          
             key={`nav-${index}`}
             className={`${classes.sidebar__menu__item} ${
               activeIndex === index && classes.active
             }`}
-            onClick={openSidebarHandler}
+            // onClick={openSidebarHandler}
+            onClick={()=>{openSidebarHandler();  navigate(nav.link)
+            }}
           >
             <div className={classes.sidebar__menu__item__icon}>
               <Icon icon={nav.icon} />
@@ -60,7 +63,7 @@ function Sidebar() {
             <div className={classes.sidebar__menu__item__txt}>
               {t(nav.section)}
             </div>
-          </Link>
+          </div>
         ))}
       </div>
 
