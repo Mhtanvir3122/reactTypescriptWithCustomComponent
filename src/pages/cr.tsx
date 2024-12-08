@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import Input2 from "../components/UI/input/Input2";
 import TextArea from "../components/UI/input/textArea";
@@ -9,6 +9,8 @@ import "../pages/style.scss";
 
 import Button from "../components/UI/button/Button";
 import Card from "../components/UI/card/Card";
+import PaginationWithLimit from "../components/pazinationWithLimit/pazinationWithLimit";
+import Pagination from "../components/pazinationWithLimit/pazinationWithLimit";
 const ITEMS_PER_PAGE = 5;
 
 // Define the Item type
@@ -24,6 +26,7 @@ const LocalStorageCRUD = () => {
   const [items, setItems] = useState<Item[]>([]);
 
   const [editId, setEditId] = useState<string | null>(null);
+  const [visibleData, setVisibleData] = useState<any[]>([]);
 
   const {
     register,
@@ -92,9 +95,18 @@ const LocalStorageCRUD = () => {
     setCurrentPage(event.selected);
   };
 
+  console.log(visibleData);
+  
+  // Mock data
+  const data = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
+
+  const handlePageChange = (visibleData: any[], page: number, limit: number) => {
+    setVisibleData(visibleData);
+    // inputRef.current==visibleData
+  };
   // Calculate the current items to display based on pagination
   const offset = currentPage * ITEMS_PER_PAGE;
-  const currentItems = items.slice(offset, offset + ITEMS_PER_PAGE);
+  const currentItems = visibleData.slice(offset, offset + ITEMS_PER_PAGE);
   return (
     <div>
       <h1>React TypeScript CRUD </h1>
@@ -188,7 +200,7 @@ const LocalStorageCRUD = () => {
           </tr>
         </thead>
         <tbody>
-          {currentItems.map((item) => (
+          {visibleData.map((item) => (
             <tr key={item.id}>
               <td>{item.title}</td>
               <td>{item.userName}</td>
@@ -216,8 +228,21 @@ const LocalStorageCRUD = () => {
           ))}
         </tbody>
       </table>
+      <br></br>
+      <Pagination
+        data={items}
+        defaultLimit={10}
+        onPageChange={handlePageChange}
+      />     
+        {/* <ul>
+        {visibleData?.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul> */}
 
-      <ReactPaginate
+      
+{/*       
+       <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}
         breakLabel={"..."}
@@ -227,7 +252,7 @@ const LocalStorageCRUD = () => {
         onPageChange={handlePageClick}
         containerClassName={"pagination"}
         activeClassName={"active"}
-      />
+      /> */}
     </div>
 
     </div>
