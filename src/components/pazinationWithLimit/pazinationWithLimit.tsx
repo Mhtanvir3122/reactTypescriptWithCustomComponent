@@ -21,7 +21,7 @@ const Pagination = <T,>({
     const start = (currentPage - 1) * limit;
     const end = start + limit;
     onPageChange(data.slice(start, end), currentPage, limit);
-  }, [currentPage, limit]); // Add dependencies to recalculate when relevant values change
+  }, [currentPage, limit,data]); // Add dependencies to recalculate when relevant values change
 
   const handleLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLimit(Number(e.target.value));
@@ -33,9 +33,9 @@ const Pagination = <T,>({
   };
 
   return (
-    <div>
+    <div className="d-flex justify-content-between">
       {/* Limit Selector */}
-      <div>
+      <div className="d-flex gap-3">
         <label htmlFor="limit">Items per page: </label>
         <select id="limit" value={limit} onChange={handleLimitChange}>
           <option value={5}>5</option>

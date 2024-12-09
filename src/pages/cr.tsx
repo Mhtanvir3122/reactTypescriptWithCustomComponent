@@ -98,15 +98,13 @@ const LocalStorageCRUD = () => {
   console.log(visibleData);
   
   // Mock data
-  const data = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
 
   const handlePageChange = (visibleData: any[], page: number, limit: number) => {
     setVisibleData(visibleData);
     // inputRef.current==visibleData
   };
   // Calculate the current items to display based on pagination
-  const offset = currentPage * ITEMS_PER_PAGE;
-  const currentItems = visibleData.slice(offset, offset + ITEMS_PER_PAGE);
+
   return (
     <div>
       <h1>React TypeScript CRUD </h1>
