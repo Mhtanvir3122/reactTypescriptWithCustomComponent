@@ -85,7 +85,7 @@ const LocalStorageCRUD = () => {
     setItems(items?.filter((item) => item?.id !== id));
   };
 
- 
+
 
   const handlePageChange = (visibleData: any[], page: number, limit: number) => {
     setVisibleData(visibleData);
@@ -97,151 +97,133 @@ const LocalStorageCRUD = () => {
       <br />
       <br />
       <div >
-      {/* <Card> */}
+        {/* <Card> */}
 
-      <form onSubmit={(handleSubmit(onSubmit))}>
+        <form onSubmit={(handleSubmit(onSubmit))}>
 
-      <Card>
-        
-   
+          <Card>
 
-        <div className="row">
-          <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
-            <Input2
-              register={register("title",)}
-              label="Title"
-              type="text"
-              // value={"title"}
-              onValueChange={(value) => setValue("title", value)}
-              placeholder="Enter User Name"
-              inputStyle={{
-                padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
-                minWidth: "100%"
-              }}
 
-            />
 
-          </div>
-          <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
-            <Input2
-              register={register("userName")}
-              label="userName"
-              type="text"
-              // value={"userName"}
-              onValueChange={(value) => setValue("userName", value)}
-              placeholder="Enter User Name"
-              inputStyle={{
-                padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
-                minWidth: "100%"
-              }}
+            <div className="row">
+              <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
+                <Input2
+                  register={register("title",)}
+                  label="Title"
+                  type="text"
+                  // value={"title"}
+                  onValueChange={(value) => setValue("title", value)}
+                  placeholder="Enter User Name"
+                  inputStyle={{
+                    padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
+                    minWidth: "100%"
+                  }}
 
-            />
+                />
 
-          </div>
+              </div>
+              <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
+                <Input2
+                  register={register("userName")}
+                  label="userName"
+                  type="text"
+                  // value={"userName"}
+                  onValueChange={(value) => setValue("userName", value)}
+                  placeholder="Enter User Name"
+                  inputStyle={{
+                    padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
+                    minWidth: "100%"
+                  }}
 
-          <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
+                />
 
-            <TextArea
-              label="description"
-              register={register("description")}
-              onValueChange={(e) => setValue("description", e)}
-              // value={"description"}
-              // onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
-              placeholder="Enter description"
-              style={{
-                // padding: "8px",
-                width: "100%",  // Takes full width of parent
-                maxWidth: "100%", // Caps the width
-                minWidth: "100%", // Sets a minimum width
-                minHeight: "100px",
-                height: "100px"
-              }} />
-          </div>
-        </div>
-        <div className="d-flex justify-content-end mb-5">
-        
-    <Button type="submit">{editId ? "Update" : "Add"}</Button>
+              </div>
 
-        
-        </div>
-        </Card>
-   
-      </form>
-      {/* </Card> */}
-     
+              <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
+
+                <TextArea
+                  label="description"
+                  register={register("description")}
+                  onValueChange={(e) => setValue("description", e)}
+                  // value={"description"}
+                  // onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
+                  placeholder="Enter description"
+                  style={{
+                    // padding: "8px",
+                    width: "100%",  // Takes full width of parent
+                    maxWidth: "100%", // Caps the width
+                    minWidth: "100%", // Sets a minimum width
+                    minHeight: "100px",
+                    height: "100px"
+                  }} />
+              </div>
+            </div>
+            <div className="d-flex justify-content-end mb-5">
+
+              <Button type="submit">{editId ? "Update" : "Add"}</Button>
+
+
+            </div>
+          </Card>
+
+        </form>
+        {/* </Card> */}
+
       </div>
 
 
       <div >
-      <table >
-        <thead>
-          <tr>
-          <th>No</th>
+        <table >
+          <thead>
+            <tr>
+              <th>No</th>
 
-            <th>Title</th>
-            <th>User Name</th>
-            <th>Description</th>
-            <th style={{width:200}}>Action</th>
+              <th>Title</th>
+              <th>User Name</th>
+              <th>Description</th>
+              <th style={{ width: 200 }}>Action</th>
 
-          </tr>
-        </thead>
-        <tbody>
-          {visibleData.map((item,key) => (
-            <tr key={item.id}>
-                            <td>{key+1}</td>
-
-              <td>{item.title}</td>
-              <td>{item.userName}</td>
-              <td>{item.description}</td>
-              <td><div className="d-flex justify-content-center" style={{ marginTop: "10px" }}>
-              <button
-                onClick={() => handleEditItem(item?.id)}
-                style={{ marginRight: "10px", padding: "5px 10px" }}
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDeleteItem(item?.id)}
-                style={{
-                  padding: "5px 10px",
-                  backgroundColor: "#f44336",
-                  color: "white",
-                  border: "none",
-                }}
-              >
-                Delete
-              </button>
-            </div></td>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <br></br>
-      <Pagination
-        data={items}
-        defaultLimit={10}
-        onPageChange={handlePageChange}
-      />     
-        {/* <ul>
-        {visibleData?.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul> */}
+          </thead>
+          <tbody>
+            {visibleData.map((item, key) => (
+              <tr key={item.id}>
+                <td>{key + 1}</td>
 
-      
-{/*       
-       <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        breakLabel={"..."}
-        pageCount={Math?.ceil(items?.length / ITEMS_PER_PAGE)}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={2}
-        onPageChange={handlePageClick}
-        containerClassName={"pagination"}
-        activeClassName={"active"}
-      /> */}
-    </div>
+                <td>{item.title}</td>
+                <td>{item.userName}</td>
+                <td>{item.description}</td>
+                <td><div className="d-flex justify-content-center" style={{ marginTop: "10px" }}>
+                  <button
+                    onClick={() => handleEditItem(item?.id)}
+                    style={{ marginRight: "10px", padding: "5px 10px" }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDeleteItem(item?.id)}
+                    style={{
+                      padding: "5px 10px",
+                      backgroundColor: "#f44336",
+                      color: "white",
+                      border: "none",
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <br></br>
+        <Pagination
+          data={items}
+          defaultLimit={10}
+          onPageChange={handlePageChange}
+        />
+
+      </div>
 
     </div>
   );
