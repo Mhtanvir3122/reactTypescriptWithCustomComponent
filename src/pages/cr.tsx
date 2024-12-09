@@ -11,7 +11,6 @@ import Button from "../components/UI/button/Button";
 import Card from "../components/UI/card/Card";
 import PaginationWithLimit from "../components/pazinationWithLimit/pazinationWithLimit";
 import Pagination from "../components/pazinationWithLimit/pazinationWithLimit";
-const ITEMS_PER_PAGE = 5;
 
 // Define the Item type
 interface Item {
@@ -19,7 +18,6 @@ interface Item {
   title: string;
   description: string;
   userName: string;
-
 }
 
 const LocalStorageCRUD = () => {
@@ -69,41 +67,29 @@ const LocalStorageCRUD = () => {
       };
       setItems([...items, newItemObject]);
     }
-    // reset({ title: "", description: "", userName: "" })
+    reset({ title: "", description: "", userName: "" })
   };
 
   // Edit item
   const handleEditItem = (id: string) => {
     const itemToEdit = items.find((item) => item.id === id);
     if (itemToEdit) {
-      reset({ itemToEdit })
-      console.log(itemToEdit, "itemToEdit");
       reset(itemToEdit)
-
       setEditId(id);
     }
+
   };
 
   // Delete item
   const handleDeleteItem = (id: string) => {
     setItems(items?.filter((item) => item?.id !== id));
   };
-  const [currentPage, setCurrentPage] = useState<number>(0);
 
-  // Handle page change
-  const handlePageClick = (event: { selected: number }) => {
-    setCurrentPage(event.selected);
-  };
-
-  console.log(visibleData);
-  
-  // Mock data
+ 
 
   const handlePageChange = (visibleData: any[], page: number, limit: number) => {
     setVisibleData(visibleData);
-    // inputRef.current==visibleData
   };
-  // Calculate the current items to display based on pagination
 
   return (
     <div>
@@ -190,20 +176,24 @@ const LocalStorageCRUD = () => {
       <table >
         <thead>
           <tr>
+          <th>No</th>
+
             <th>Title</th>
             <th>User Name</th>
             <th>Description</th>
-            <th>Action</th>
+            <th style={{width:200}}>Action</th>
 
           </tr>
         </thead>
         <tbody>
-          {visibleData.map((item) => (
+          {visibleData.map((item,key) => (
             <tr key={item.id}>
+                            <td>{key+1}</td>
+
               <td>{item.title}</td>
               <td>{item.userName}</td>
               <td>{item.description}</td>
-              <td><div style={{ marginTop: "10px" }}>
+              <td><div className="d-flex justify-content-center" style={{ marginTop: "10px" }}>
               <button
                 onClick={() => handleEditItem(item?.id)}
                 style={{ marginRight: "10px", padding: "5px 10px" }}

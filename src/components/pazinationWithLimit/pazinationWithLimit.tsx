@@ -21,7 +21,7 @@ const Pagination = <T,>({
     const start = (currentPage - 1) * limit;
     const end = start + limit;
     onPageChange(data.slice(start, end), currentPage, limit);
-  }, [currentPage, limit,data]); // Add dependencies to recalculate when relevant values change
+  }, [currentPage, limit, data]); // Add dependencies to recalculate when relevant values change
 
   const handleLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLimit(Number(e.target.value));
@@ -43,10 +43,14 @@ const Pagination = <T,>({
           <option value={20}>20</option>
           <option value={50}>50</option>
         </select>
+        <span>
+							{(currentPage * limit + 1 - limit)} থেকে&nbsp;
+							{(currentPage * limit)} পর্যন্ত দেখানো হচ্ছে,&nbsp;
+							<b>মোট {(data?.length)}</b>
+						</span>
       </div>
 
-      {/* Page Buttons */}
-      <div>
+       <div>
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
