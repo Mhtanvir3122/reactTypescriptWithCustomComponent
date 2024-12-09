@@ -1,15 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Input2 from "../components/UI/input/Input2";
 import TextArea from "../components/UI/input/textArea";
-import ReactPaginate from "react-paginate";
 import "../pages/style.scss";
 // import Card from "../components/UI/card/Card";
 // import { Card } from 'react-bootstrap';
 
 import Button from "../components/UI/button/Button";
 import Card from "../components/UI/card/Card";
-import PaginationWithLimit from "../components/pazinationWithLimit/pazinationWithLimit";
 import Pagination from "../components/pazinationWithLimit/pazinationWithLimit";
 
 // Define the Item type
