@@ -9,6 +9,8 @@ import "../pages/style.scss";
 import Button from "../components/UI/button/Button";
 import Card from "../components/UI/card/Card";
 import Pagination from "../components/pazinationWithLimit/pazinationWithLimit";
+import DataTable from "./table/crTable";
+import Modal from "../components/modal/modal";
 
 // Define the Item type
 interface Item {
@@ -83,7 +85,10 @@ const LocalStorageCRUD = () => {
     setItems(items?.filter((item) => item?.id !== id));
   };
 
+  const [isModalOpen, setModalOpen] = useState(false);
 
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
   const handlePageChange = (visibleData: any[], page: number, limit: number) => {
     setVisibleData(visibleData);
@@ -168,52 +173,18 @@ const LocalStorageCRUD = () => {
         {/* </Card> */}
 
       </div>
+      <button onClick={openModal}>Open Modal</button>
+
+<Modal isOpen={isModalOpen} onClose={closeModal} />
+
 
 
       <div >
-        <table >
-          <thead>
-            <tr>
-              <th>No</th>
+        <DataTable
+          handleDeleteItem={handleDeleteItem}
+          handleEditItem={handleEditItem}
+          visibleData={visibleData} />
 
-              <th>Title</th>
-              <th>User Name</th>
-              <th>Description</th>
-              <th style={{ width: 200 }}>Action</th>
-
-            </tr>
-          </thead>
-          <tbody>
-            {visibleData.map((item, key) => (
-              <tr key={item.id}>
-                <td>{key + 1}</td>
-
-                <td>{item.title}</td>
-                <td>{item.userName}</td>
-                <td>{item.description}</td>
-                <td><div className="d-flex justify-content-center" style={{ marginTop: "10px" }}>
-                  <button
-                    onClick={() => handleEditItem(item?.id)}
-                    style={{ marginRight: "10px", padding: "5px 10px" }}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDeleteItem(item?.id)}
-                    style={{
-                      padding: "5px 10px",
-                      backgroundColor: "#f44336",
-                      color: "white",
-                      border: "none",
-                    }}
-                  >
-                    Delete
-                  </button>
-                </div></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
         <br></br>
         <Pagination
           data={items}
