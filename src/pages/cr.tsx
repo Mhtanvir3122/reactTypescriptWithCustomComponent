@@ -10,7 +10,8 @@ import Button from "../components/UI/button/Button";
 import Card from "../components/UI/card/Card";
 import Pagination from "../components/pazinationWithLimit/pazinationWithLimit";
 import DataTable from "./table/crTable";
-import Modal from "../components/modal/modal";
+import Modal from "../components/Modal";
+import { ConfirmationUnPublishModal } from "../components/Modal/ConfirmationUnPublishModal";
 
 // Define the Item type
 interface Item {
@@ -175,7 +176,7 @@ const LocalStorageCRUD = () => {
       </div>
       <button onClick={openModal}>Open Modal</button>
 
-<Modal isOpen={isModalOpen} onClose={closeModal} />
+<ConfirmationUnPublishModal isOpen={isModalOpen} onClose={closeModal} />
 
 
 

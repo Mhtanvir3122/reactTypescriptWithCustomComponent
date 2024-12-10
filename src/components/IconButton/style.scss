@@ -1,0 +1,38 @@
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.icon-button--fill {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.icon-button--outline {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.icon-button--light {
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+}
+
+.icon-button--circle {
+  border-radius: 50%;
+}
+
+.icon-button--pill {
+  border-radius: 999px;
+}
+
+.icon-button--disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
