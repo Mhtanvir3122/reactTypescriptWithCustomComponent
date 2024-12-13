@@ -1,4 +1,5 @@
 import React from "react";
+import Icon from "../../components/Icon";
 
 interface Item {
   id: string;
@@ -52,7 +53,7 @@ const DataTable: React.FC<Props> = ({ visibleData, handleEditItem, handleDeleteI
                     border: "none",
                   }}
                 >
-                  Delete
+                  Delete <Icon icon="delete"/>
                 </button>
               </div>
             </td>
