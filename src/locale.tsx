@@ -10,7 +10,7 @@ i18n
     resources: {
       en: {
         translation: {
-          zahraMirzaei: "Zahra Mirzaei",
+          zahraMirzaei: "Tanvir",
           admin: "admin",
           dashboard: "Dashboard",
           orders: "Orders",
@@ -98,7 +98,7 @@ i18n
         translation: { 
           dcddddddddddddddddddddd:"fffffffffffffffffffffffff",
 
-          zahraMirzaei: "জাহরা মিরজাই",
+          zahraMirzaei: "Tanvir",
           admin: "অ্যাডমিন",
           dashboard: "ড্যাশবোর্ড",
           orders: "অর্ডার",
