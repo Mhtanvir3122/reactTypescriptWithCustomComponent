@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import Card from "../components/UI/card/Card";
 import Input2 from "../components/UI/input/Input2";
 import { createEmployee, ReportService } from "../service/service";
-import ThemeContext from "../store/themeContext";
 
 const API_URL = "http://localhost:8080/service1/employees/getList"; // API Gateway URL
 
@@ -23,9 +22,7 @@ const BlankPage = () => {
     const [data, setData] = useState<any>();
 
     const [error, setError] = useState<string | null>(null);
-    const themeCtx = useContext(ThemeContext);
 
-    const isdark= themeCtx?.theme==="dark"
 
   const {
     register,
