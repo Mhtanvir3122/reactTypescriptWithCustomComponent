@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./Input.module.scss";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import ThemeContext from "../../../store/themeContext";
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   value?: string;
@@ -26,6 +27,10 @@ const TextArea: React.FC<TextAreaProps> = ({
     onValueChange(e.target.value);
   };
   const { t } = useTranslation();
+  const themeCtx = useContext(ThemeContext);
+
+  const isdark= themeCtx?.theme==="dark"
+
 
   return (
     <div>
@@ -38,7 +43,8 @@ const TextArea: React.FC<TextAreaProps> = ({
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
-        style={{ padding: "8px", width: "100%", marginBottom: "10px", ...inputStyle }}
+        style={{ padding: "8px", width: "100%", marginBottom: "10px", ...inputStyle  ,         color:isdark?"white":"black"
+        }}
         {...rest}
       />
       </div>

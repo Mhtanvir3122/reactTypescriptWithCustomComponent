@@ -10,7 +10,6 @@ export interface Employee {
 const API_URL = "http://localhost:8080/service1/";
 const API_URL2 = "http://localhost:8080/service1/employees/save"; // API Gateway URL
 
-console.log(API_URL);
 
 export const getEmployees = async () => {
     const response = await axios.get<Employee[]>(API_URL);
@@ -35,3 +34,9 @@ export const updateEmployee = async (id: number, employee: Employee) => {
 export const deleteEmployee = async (id: number) => {
     await axios.delete(`${API_URL}/${id}`);
 };
+
+
+export const ReportService = {
+    orgWiseAssetStatistics: async (payload:any): Promise<any> =>
+      await axios.post( "http://localhost:8080/service1/employees/search", payload),
+}

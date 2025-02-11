@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import TextArea from "../components/UI/input/textArea";
 import { useForm } from "react-hook-form";
 import Card from "../components/UI/card/Card";
 import Input2 from "../components/UI/input/Input2";
-import { createEmployee } from "../service/service";
+import { createEmployee, ReportService } from "../service/service";
+import ThemeContext from "../store/themeContext";
 
 const API_URL = "http://localhost:8080/service1/employees/getList"; // API Gateway URL
 
@@ -13,13 +14,18 @@ const API_URL = "http://localhost:8080/service1/employees/getList"; // API Gatew
 interface Employee {
     id: number;
     name: string;
-    position: string;
+    email: string;
 }
 
 const BlankPage = () => {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [data, setData] = useState<any>();
+
     const [error, setError] = useState<string | null>(null);
+    const themeCtx = useContext(ThemeContext);
+
+    const isdark= themeCtx?.theme==="dark"
 
   const {
     register,
@@ -30,24 +36,24 @@ const BlankPage = () => {
     setValue,
   } = useForm();
     useEffect(() => {
-        const fetchEmployees = async () => {
-            try {
-                const response = await axios.get<Employee[]>(API_URL);
-                setEmployees(response.data);
-            } catch (err) {
-                setError("Failed to fetch employees");
-                console.error("Error fetching employees:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchEmployees();
+      getEmployeeList();
+     
     }, []);
+
+    const getEmployeeList = () => {
+      ReportService.orgWiseAssetStatistics({emails:["tanvirhider24@gmail.com"]})
+        .then((resp) => {
+          setData(resp);
+        })
+        .catch((err) => {
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    };
     const onSubmit = (e: any) => {
       createEmployee(e)
 
-      console.log(e);
       
     }
 
@@ -90,30 +96,30 @@ const BlankPage = () => {
         placeholder="Enter User Name"
         inputStyle={{
           padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
-          minWidth: "100%"
+          minWidth: "100%",
+
         }}
 
       />
 
     </div>
 
-    <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
+    <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6 ">
 
       <TextArea
         label="department"
         register={register("department")}
         onValueChange={(e) => setValue("department", e)}
-        // value={"department"}
-        // onChange={(e) => setNewItem({ ...newItem, department: e.target.value })}
         placeholder="Enter department"
-        style={{
+        inputStyle={{
           // padding: "8px",
           width: "100%",  // Takes full width of parent
           maxWidth: "100%", // Caps the width
           minWidth: "100%", // Sets a minimum width
           minHeight: "100px",
-          height: "100px"
-        }} />
+          height: "100px",
+        }} 
+        />
     </div>
   </div>
   <div className="d-flex justify-content-end mb-5">
@@ -126,9 +132,10 @@ const BlankPage = () => {
 
 </form>
             <ul>
-                {employees.map((emp) => (
-                    <li key={emp.id}>
-                        {emp.name} - {emp.position}
+                {data?.data?.map((emp:any) => (
+
+                    <li key={emp?.id}>
+                        {emp?.name} - {emp?.email}
                     </li>
                 ))}
             </ul>
