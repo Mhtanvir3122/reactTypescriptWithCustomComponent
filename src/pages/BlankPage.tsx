@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import Card from "../components/UI/card/Card";
 import Input2 from "../components/UI/input/Input2";
 import { createEmployee, ReportService } from "../service/service";
+import SearchBox from "../components/topnav/searchBox/SearchBox";
 
 const API_URL = "http://localhost:8080/service1/employees/getList"; // API Gateway URL
 
@@ -20,9 +21,11 @@ const BlankPage = () => {
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [data, setData] = useState<any>();
+    const [searchKey, setSearchKey] = useState<any>();
 
     const [error, setError] = useState<string | null>(null);
 
+console.log(searchKey);
 
   const {
     register,
@@ -35,10 +38,10 @@ const BlankPage = () => {
     useEffect(() => {
       getEmployeeList();
      
-    }, []);
+    }, [searchKey]);
 
     const getEmployeeList = () => {
-      ReportService.orgWiseAssetStatistics({emails:["tanvirhider24@gmail.com"]})
+      ReportService.orgWiseAssetStatistics({keyword:searchKey})
         .then((resp) => {
           setData(resp);
         })
@@ -63,7 +66,7 @@ const BlankPage = () => {
             <form onSubmit={(handleSubmit(onSubmit))}>
 
 <Card>
-
+<SearchBox searchKey={setSearchKey}/>
 
 
   <div className="row">
