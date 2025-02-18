@@ -10,7 +10,7 @@ type DrawerHeaderProps = {
 
 const DrawerHeader = ({ title, closeIconAction, backIconAction }: DrawerHeaderProps) => {
 	return (
-		<div className='border-bottom position-sticky sticky-top d-flex align-items-center justify-content-between px-0 py-0 bg-white'>
+		<div className=' position-sticky sticky-top d-flex align-items-center justify-content-between px-0 py-0 bg-white'>
 			<div className='d-flex align-items-center gap-2'>
 				{backIconAction ? (
 					<Icon

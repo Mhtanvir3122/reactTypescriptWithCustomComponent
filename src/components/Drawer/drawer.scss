@@ -13,6 +13,7 @@
 }
 
 .card2 {
+  height: 660px;
 
   @include slideIn(200px, 0.3s);
 }
