@@ -41,7 +41,14 @@ const TypeBranchForm = ({
     formState: { errors },
   } = useForm();
 
-
+console.log(updateData);
+useEffect(() => {
+  if (isOpen && updateData) {
+   
+    reset({...updateData});
+  } else reset({});
+  // eslint-disable-next-line
+}, [isOpen, updateData,reset]);
 
   return (
     <Drawer

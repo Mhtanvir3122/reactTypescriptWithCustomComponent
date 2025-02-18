@@ -25,6 +25,8 @@ const BlankPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<any>();
   const [data2, setData2] = useState<any>();
+  const [updatedData, setUpdatedData] = useState<any>();
+
 
   const [searchKey, setSearchKey] = useState<any>();
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -68,6 +70,14 @@ const BlankPage = () => {
     setData2(visibleData);
   };
 
+  const handleEditItem = (id: string) => {
+    setIsDrawerOpen(true);
+    console.log(id);
+    setUpdatedData(id)
+    
+
+
+  };
   if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
 
@@ -78,7 +88,7 @@ const BlankPage = () => {
       <Card>
         {!isDrawerOpen ? <>
           <SearchBox searchKey={setSearchKey} />
-          <div className="d-flex justify-content-end mt-4">
+          <div className="d-flex justify-content-end mt-4 mb-3">
             <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
               যুক্ত করুন
             </Button>
@@ -90,7 +100,7 @@ const BlankPage = () => {
         <TypeBranchForm
           isOpen={isDrawerOpen}
           onClose={onDrawerClose}
-          updateData={"updateData"}
+          updateData={updatedData}
           onSubmit={onSubmit}
           submitLoading={true}
         />
@@ -101,7 +111,7 @@ const BlankPage = () => {
 <div >
 <BlankTable
   // handleDeleteItem={handleDeleteItem}
-  // handleEditItem={handleEditItem}
+  handleEditItem={handleEditItem}
   visibleData={data2} />
 
 <br></br>

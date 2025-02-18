@@ -9,7 +9,7 @@ interface Item {
 
 interface Props {
   visibleData: Item[];
-  handleEditItem?: (id: string) => void;
+  handleEditItem: any;
   handleDeleteItem?: (id: string) => void;
 }
 
@@ -38,12 +38,13 @@ const BlankTable: React.FC<Props> = ({ visibleData, handleEditItem, handleDelete
                 className="d-flex justify-content-center"
                 style={{ marginTop: "10px" }}
               >
-                {/* <button
-                  onClick={() => handleEditItem(item.id)}
+             <button
+                  onClick={() => handleEditItem(item)}
                   style={{ marginRight: "10px", padding: "5px 10px" }}
                 >
                   Edit
                 </button>
+                   {/* 
                 <button
                   onClick={() => handleDeleteItem(item.id)}
                   style={{
