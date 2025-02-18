@@ -8,6 +8,8 @@ import Input2 from "../components/UI/input/Input2";
 import { createEmployee, ReportService } from "../service/service";
 import SearchBox from "../components/topnav/searchBox/SearchBox";
 import TypeBranchForm from "./form/Form";
+import BlankTable from "./table/blankTable";
+import Pagination from "../components/pazinationWithLimit/pazinationWithLimit";
 
 const API_URL = "http://localhost:8080/service1/employees/getList"; // API Gateway URL
 
@@ -22,12 +24,13 @@ const BlankPage = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<any>();
+  const [data2, setData2] = useState<any>();
+
   const [searchKey, setSearchKey] = useState<any>();
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
 
   const [error, setError] = useState<string | null>(null);
 
-  console.log(searchKey);
 
   const {
     register,
@@ -61,6 +64,9 @@ const BlankPage = () => {
   const onDrawerClose = () => {
     setIsDrawerOpen(false);
   };
+  const handlePageChange = (visibleData: any[], page: number, limit: number) => {
+    setData2(visibleData);
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
@@ -90,14 +96,31 @@ const BlankPage = () => {
         />
         {!isDrawerOpen ?
 
-          <ul>
-            {data?.data?.map((emp: any) => (
 
-              <li key={emp?.id}>
-                {emp?.name} - {emp?.email}
-              </li>
-            ))}
-          </ul>
+
+<div >
+<BlankTable
+  // handleDeleteItem={handleDeleteItem}
+  // handleEditItem={handleEditItem}
+  visibleData={data2} />
+
+<br></br>
+<Pagination
+  data={data?.data}
+  defaultLimit={10}
+  onPageChange={handlePageChange}
+/>
+
+</div>
+
+          // <ul>
+          //   {data?.data?.map((emp: any) => (
+
+          //     <li key={emp?.id}>
+          //       {emp?.name} - {emp?.email}
+          //     </li>
+          //   ))}
+          // </ul>
           : null}
       </Card>
 

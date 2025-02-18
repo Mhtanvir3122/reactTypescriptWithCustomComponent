@@ -10,7 +10,7 @@ function TopNavRightBox() {
     <div className={classes.topNavBox_right}>
       <div className={classes.wrapper}>
         <LangBox />
-        <ThemeBox />
+        {/* <ThemeBox /> */}
       </div>
       <Profile />
     </div>

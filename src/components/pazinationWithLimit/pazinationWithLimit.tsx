@@ -13,14 +13,13 @@ const Pagination = <T,>({
 }: PaginationProps<T>): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(defaultLimit);
-
-  const totalPages = Math.ceil(data.length / limit);
+  const totalPages = Math.ceil(data?.length / limit);
 
   // Calculate visible data when currentPage, limit, or data changes
   useEffect(() => {
     const start = (currentPage - 1) * limit;
     const end = start + limit;
-    onPageChange(data.slice(start, end), currentPage, limit);
+    onPageChange(data?.slice(start, end), currentPage, limit);
   }, [currentPage, limit, data]); // Add dependencies to recalculate when relevant values change
 
   const handleLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

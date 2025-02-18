@@ -1,3 +1,26 @@
+// .drawer {
+//   .drawer-content {
+//     // height: 100vh;
+//     width: 100%;
+//     position: relative;
+//     overflow: hidden;
+//     .drawer-body {
+//       // height: calc(100vh - 125px);
+//       overflow-y: auto;
+//       position: relative;
+//       z-index: 2;
+//     }
+//     .drawer-footer {
+//       // position: absolute;
+//       // bottom: 0;
+//       // left: 0;
+//       // right: 0;
+//       // box-shadow: 0px -5px 10px rgba(98, 98, 98, 0.1);
+//       // z-index: 1;
+//     }
+//   }
+// }
+
 @mixin slideIn($distance: 100px, $duration: 1s) {
   @keyframes slideIn {
     from {

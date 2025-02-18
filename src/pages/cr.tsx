@@ -93,6 +93,8 @@ const LocalStorageCRUD = () => {
 
   const handlePageChange = (visibleData: any[], page: number, limit: number) => {
     setVisibleData(visibleData);
+    console.log(visibleData);
+    
   };
 
   return (
