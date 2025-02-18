@@ -1,6 +1,6 @@
 
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import Drawer from "../../components/Drawer";
 import DrawerBody from "../../components/Drawer/DrawerBody";
@@ -30,7 +30,7 @@ const TypeBranchForm = ({
   updateData,
   submitLoading,
 }: ITypeBranchForm) => {
-  const [options, setOptions] = useState<object>();
+
   const {
     register,
     handleSubmit,
@@ -41,12 +41,11 @@ const TypeBranchForm = ({
     formState: { errors },
   } = useForm();
 
-console.log(updateData);
 useEffect(() => {
   if (isOpen && updateData) {
-   
     reset({...updateData});
-  } else reset({});
+  } else  reset({updateData});
+
   // eslint-disable-next-line
 }, [isOpen, updateData,reset]);
 

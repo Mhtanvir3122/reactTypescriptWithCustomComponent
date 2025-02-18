@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import React from "react";
 
 interface Item {
@@ -10,7 +11,7 @@ interface Item {
 interface Props {
   visibleData: Item[];
   handleEditItem: any;
-  handleDeleteItem?: (id: string) => void;
+  handleDeleteItem: (id: number) => void;
 }
 
 const BlankTable: React.FC<Props> = ({ visibleData, handleEditItem, handleDeleteItem }) => {
@@ -44,9 +45,8 @@ const BlankTable: React.FC<Props> = ({ visibleData, handleEditItem, handleDelete
                 >
                   Edit
                 </button>
-                   {/* 
                 <button
-                  onClick={() => handleDeleteItem(item.id)}
+                  onClick={() => handleDeleteItem(Number(item.id))}
                   style={{
                     padding: "5px 10px",
                     backgroundColor: "#f44336",
@@ -55,7 +55,7 @@ const BlankTable: React.FC<Props> = ({ visibleData, handleEditItem, handleDelete
                   }}
                 >
                   Delete <Icon icon="delete"/>
-                </button> */}
+                </button> 
               </div>
             </td>
           </tr>

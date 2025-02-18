@@ -5,7 +5,7 @@ import TextArea from "../components/UI/input/textArea";
 import { useForm } from "react-hook-form";
 import Card from "../components/UI/card/Card";
 import Input2 from "../components/UI/input/Input2";
-import { createEmployee, ReportService } from "../service/service";
+import { createEmployee,  deleteEmployee,  ReportService, updateEmployee } from "../service/service";
 import SearchBox from "../components/topnav/searchBox/SearchBox";
 import TypeBranchForm from "./form/Form";
 import BlankTable from "./table/blankTable";
@@ -59,12 +59,18 @@ const BlankPage = () => {
       });
   };
   const onSubmit = (e: any) => {
-    createEmployee(e)
-
+    
+    updatedData?.id? updateEmployee(updatedData?.id,e): createEmployee(e);
+    onDrawerClose();
 
   }
   const onDrawerClose = () => {
+
     setIsDrawerOpen(false);
+    setUpdatedData(null);
+    getEmployeeList();
+
+
   };
   const handlePageChange = (visibleData: any[], page: number, limit: number) => {
     setData2(visibleData);
@@ -72,12 +78,25 @@ const BlankPage = () => {
 
   const handleEditItem = (id: string) => {
     setIsDrawerOpen(true);
-    console.log(id);
     setUpdatedData(id)
     
 
-
+ 
   };
+
+     const handleDeleteItem = (e: number) => {
+      ReportService.deleteEmployee(e)
+        .then((res) => {
+          getEmployeeList();
+        })
+    };
+
+  // const handleDeleteItem = (e: number) => {
+  //   deleteEmployee(e);
+    
+  //   onDrawerClose();
+
+  // };
   if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
 
@@ -110,7 +129,7 @@ const BlankPage = () => {
 
 <div >
 <BlankTable
-  // handleDeleteItem={handleDeleteItem}
+  handleDeleteItem={handleDeleteItem}
   handleEditItem={handleEditItem}
   visibleData={data2} />
 
