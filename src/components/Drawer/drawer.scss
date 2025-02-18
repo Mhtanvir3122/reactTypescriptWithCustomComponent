@@ -1,0 +1,18 @@
+@mixin slideIn($distance: 100px, $duration: 1s) {
+  @keyframes slideIn {
+    from {
+      transform: translateX(-$distance);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  animation: slideIn $duration ease-out;
+}
+
+.card2 {
+
+  @include slideIn(200px, 0.3s);
+}

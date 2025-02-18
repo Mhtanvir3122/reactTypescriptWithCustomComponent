@@ -7,25 +7,27 @@ import Card from "../components/UI/card/Card";
 import Input2 from "../components/UI/input/Input2";
 import { createEmployee, ReportService } from "../service/service";
 import SearchBox from "../components/topnav/searchBox/SearchBox";
+import TypeBranchForm from "./form/Form";
 
 const API_URL = "http://localhost:8080/service1/employees/getList"; // API Gateway URL
 
 
 interface Employee {
-    id: number;
-    name: string;
-    email: string;
+  id: number;
+  name: string;
+  email: string;
 }
 
 const BlankPage = () => {
-    const [employees, setEmployees] = useState<Employee[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [data, setData] = useState<any>();
-    const [searchKey, setSearchKey] = useState<any>();
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [data, setData] = useState<any>();
+  const [searchKey, setSearchKey] = useState<any>();
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
 
-    const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-console.log(searchKey);
+  console.log(searchKey);
 
   const {
     register,
@@ -35,112 +37,73 @@ console.log(searchKey);
     control,
     setValue,
   } = useForm();
-    useEffect(() => {
-      getEmployeeList();
-     
-    }, [searchKey]);
+  useEffect(() => {
+    getEmployeeList();
 
-    const getEmployeeList = () => {
-      ReportService.orgWiseAssetStatistics({keyword:searchKey})
-        .then((resp) => {
-          setData(resp);
-        })
-        .catch((err) => {
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    };
-    const onSubmit = (e: any) => {
-      createEmployee(e)
+  }, [searchKey]);
 
-      
-    }
-
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p style={{ color: "red" }}>{error}</p>;
-
-    return (
-        <div>
-            <h2>Employee List</h2>
-            <form onSubmit={(handleSubmit(onSubmit))}>
-
-<Card>
-<SearchBox searchKey={setSearchKey}/>
+  const getEmployeeList = () => {
+    ReportService.orgWiseAssetStatistics({ keyword: searchKey })
+      .then((resp) => {
+        setData(resp);
+      })
+      .catch((err) => {
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+  const onSubmit = (e: any) => {
+    createEmployee(e)
 
 
-  <div className="row">
-    <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
-      <Input2
-        register={register("name",)}
-        label="name"
-        type="text"
-        // value={"name"}
-        onValueChange={(value) => setValue("name", value)}
-        placeholder="Enter User Name"
-        inputStyle={{
-          padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
-          minWidth: "100%"
-        }}
+  }
+  const onDrawerClose = () => {
+    setIsDrawerOpen(false);
+  };
 
-      />
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
 
-    </div>
-    <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
-      <Input2
-        register={register("email")}
-        label="email"
-        type="text"
-        // value={"email"}
-        onValueChange={(value) => setValue("email", value)}
-        placeholder="Enter User Name"
-        inputStyle={{
-          padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
-          minWidth: "100%",
+  return (
+    <div>
+      <h2>Employee List</h2>
 
-        }}
+      <Card>
+        {!isDrawerOpen ? <>
+          <SearchBox searchKey={setSearchKey} />
+          <div className="d-flex justify-content-end mt-4">
+            <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
+              যুক্ত করুন
+            </Button>
+          </div>
+        </>
 
-      />
+          : null}
 
-    </div>
-
-    <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6 ">
-
-      <TextArea
-        label="department"
-        register={register("department")}
-        onValueChange={(e) => setValue("department", e)}
-        placeholder="Enter department"
-        inputStyle={{
-          // padding: "8px",
-          width: "100%",  // Takes full width of parent
-          maxWidth: "100%", // Caps the width
-          minWidth: "100%", // Sets a minimum width
-          minHeight: "100px",
-          height: "100px",
-        }} 
+        <TypeBranchForm
+          isOpen={isDrawerOpen}
+          onClose={onDrawerClose}
+          updateData={"updateData"}
+          onSubmit={onSubmit}
+          submitLoading={true}
         />
+        {!isDrawerOpen ?
+
+          <ul>
+            {data?.data?.map((emp: any) => (
+
+              <li key={emp?.id}>
+                {emp?.name} - {emp?.email}
+              </li>
+            ))}
+          </ul>
+          : null}
+      </Card>
+
+
     </div>
-  </div>
-  <div className="d-flex justify-content-end mb-5">
-
-    <Button type="submit">{"Add"}</Button>
-
-
-  </div>
-</Card>
-
-</form>
-            <ul>
-                {data?.data?.map((emp:any) => (
-
-                    <li key={emp?.id}>
-                        {emp?.name} - {emp?.email}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  );
 };
 
 
