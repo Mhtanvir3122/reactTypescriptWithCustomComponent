@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import LoginContext from "../../store/loginContext";
 import langContextObj from "../../store/langContext";
@@ -8,32 +8,41 @@ import Button from "../UI/button/Button";
 import { useTranslation } from "react-i18next";
 import classes from "./Login.module.scss";
 import { Link, useNavigate } from "react-router-dom";
+import { ReportService } from "../../service/service";
+import { useForm } from "react-hook-form";
+import Input2 from "../UI/input/Input2";
 
 function LoginBox() {
   const loginCtx = useContext(LoginContext);
   const langCtx = useContext(langContextObj);
-  const userNameRef = useRef<HTMLInputElement>(null);
   const errorMessageRef = useRef<HTMLSpanElement>(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  let isValid = true;
-  function loginHandler(e: React.FormEvent) {
-    e.preventDefault();
-    isValid = userNameRef.current?.value === "admin";
-    if (userNameRef.current) {
-      if (isValid) {
-        loginCtx.toggleLogin();
-        navigate("/");
-      } else {
-        userNameRef.current.focus();
+
+ const {
+    register,
+    handleSubmit,
+    setValue,
+  
+  } = useForm();
+
+  const logIn = (data:any) => {
+      ReportService.logIn({...data})
+        .then((resp) => {
+          loginCtx.toggleLogin();
+          navigate("/");          
+        })
+        .catch((err) => {
         errorMessageRef.current?.setAttribute(
           "style",
           "display: inline-block;opacity: 1"
         );
-      }
-    }
-  }
+        })
+      
+    };
+
+
 
   return (
     <div
@@ -46,22 +55,37 @@ function LoginBox() {
           <img src={images.logo} alt="digikala" />
         </div>
         <h2 className={classes.title}>{t("loginPage")}</h2>
-        <form onSubmit={loginHandler}>
-          <Input
-            ref={userNameRef}
-            type={"text"}
-            id={"userName"}
-            placeholder={"admin"}
-          />
-          <span ref={errorMessageRef} className={classes.errorMessage}>
-            {t("errorMessage")}
+        <form onSubmit={handleSubmit(logIn)} noValidate>
+    
+          <Input2
+                register={register("username",)}
+                label="name"
+                type="text"
+                onValueChange={(value) => setValue("username", value)}
+                placeholder="Enter User Name"
+                inputStyle={{
+                  padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
+                  minWidth: "100%"
+                }}
+
+              />
+        
+          <Input2
+                register={register("password",)}
+                label="name"
+                type="text"
+                // value={"name"}
+                onValueChange={(value) => setValue("password", value)}
+                placeholder="Enter User Name"
+                inputStyle={{
+                  padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
+                  minWidth: "100%"
+                }}
+
+              />
+          <span  ref={errorMessageRef} className={classes.errorMessage}>
+            {t("notMatch")}
           </span>
-          <Input
-            type={"password"}
-            id={"pass"}
-            value={"admin"}
-            readonly={true}
-          />
           <Button type="submit">{t("login")}</Button>
           <Link className={classes.forgat_pass} to="/">
             {t("forgetPass")}

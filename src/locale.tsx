@@ -67,7 +67,9 @@ i18n
           proName: "Product Name",
           inventoryCount: "Inventory Count",
           loginPage: "Login Your Account",
-          errorMessage: "Please enter 'admin' in User Name box",
+          errorMessage: "Something wrong",
+          notMatch: "'UserName' or 'Password' wrong",
+
           forgetPass: "Forget your password?",
           rememberMe: "Remember me",
           salesAmount: "5,340",

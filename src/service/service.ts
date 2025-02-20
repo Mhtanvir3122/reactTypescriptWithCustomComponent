@@ -48,4 +48,8 @@ export const ReportService = {
 
     deleteEmployee: async (id: number): Promise<any> =>
         await axios.delete(`${API_URLDelete}/${id}`),
+
+    logIn: async (payload:any): Promise<any> =>
+        await axios.post( "http://localhost:8080/AuthService/auth/login", payload),
+  
 }
