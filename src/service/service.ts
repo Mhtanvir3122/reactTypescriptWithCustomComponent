@@ -51,5 +51,13 @@ export const ReportService = {
 
     logIn: async (payload:any): Promise<any> =>
         await axios.post( "http://localhost:8080/AuthService/auth/login", payload),
-  
+
+    registration: async (payload:any): Promise<any> =>
+        await axios.post( "http://localhost:8080/AuthService/auth/register", payload),
+
+    forgotPass: async (payload:any): Promise<any> =>
+        await axios.post( "http://localhost:8080/AuthService/auth/forgot-password", payload),
+    
+    getUser: async (): Promise<any> =>
+        await axios.get( "http://localhost:8080/AuthService/auth/list"),
 }

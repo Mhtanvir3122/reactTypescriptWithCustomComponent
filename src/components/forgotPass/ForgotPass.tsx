@@ -12,7 +12,7 @@ import { ReportService } from "../../service/service";
 import { useForm } from "react-hook-form";
 import Input2 from "../UI/input/Input2";
 
-function LoginBox() {
+function ForgotPass() {
   const loginCtx = useContext(LoginContext);
   const langCtx = useContext(langContextObj);
   const errorMessageRef = useRef<HTMLSpanElement>(null);
@@ -28,11 +28,10 @@ function LoginBox() {
   } = useForm();
 
   const logIn = (data:any) => {
-      ReportService.logIn({...data})
+      ReportService.forgotPass({...data})
         .then((resp) => {
-          loginCtx.toggleLogin();
-          navigate("/");   
-          getUser()    ;   
+          // loginCtx.toggleLogin();
+          navigate("/");          
         })
         .catch((err) => {
         errorMessageRef.current?.setAttribute(
@@ -44,23 +43,6 @@ function LoginBox() {
     };
 
 
-    const getUser = () => {
-      ReportService.getUser()
-        .then((resp) => {
-          console.log(resp);
-          
-                
-        })
-        .catch((err) => {
-        errorMessageRef.current?.setAttribute(
-          "style",
-          "display: inline-block;opacity: 1"
-        );
-        })
-      
-    };
-
-    
 
   return (
     <div
@@ -74,12 +56,12 @@ function LoginBox() {
         </div>
         <h2 className={classes.title}>{t("loginPage")}</h2>
         <form onSubmit={handleSubmit(logIn)} noValidate>
-    
+    hjsjgsgjgh
           <Input2
-                register={register("username",)}
+                register={register("email",)}
                 label="name"
                 type="text"
-                onValueChange={(value) => setValue("username", value)}
+                onValueChange={(value) => setValue("email", value)}
                 placeholder="Enter User Name"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
@@ -89,11 +71,11 @@ function LoginBox() {
               />
         
           <Input2
-                register={register("password",)}
+                register={register("newPassword",)}
                 label="name"
                 type="text"
                 // value={"name"}
-                onValueChange={(value) => setValue("password", value)}
+                onValueChange={(value) => setValue("newPassword", value)}
                 placeholder="Enter User Name"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
@@ -132,4 +114,4 @@ function LoginBox() {
   );
 }
 
-export default LoginBox;
+export default ForgotPass;

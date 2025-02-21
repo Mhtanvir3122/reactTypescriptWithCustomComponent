@@ -12,7 +12,7 @@ import { ReportService } from "../../service/service";
 import { useForm } from "react-hook-form";
 import Input2 from "../UI/input/Input2";
 
-function LoginBox() {
+function Registration() {
   const loginCtx = useContext(LoginContext);
   const langCtx = useContext(langContextObj);
   const errorMessageRef = useRef<HTMLSpanElement>(null);
@@ -28,11 +28,9 @@ function LoginBox() {
   } = useForm();
 
   const logIn = (data:any) => {
-      ReportService.logIn({...data})
+      ReportService.registration({...data})
         .then((resp) => {
-          loginCtx.toggleLogin();
-          navigate("/");   
-          getUser()    ;   
+          navigate("/login");          
         })
         .catch((err) => {
         errorMessageRef.current?.setAttribute(
@@ -44,23 +42,6 @@ function LoginBox() {
     };
 
 
-    const getUser = () => {
-      ReportService.getUser()
-        .then((resp) => {
-          console.log(resp);
-          
-                
-        })
-        .catch((err) => {
-        errorMessageRef.current?.setAttribute(
-          "style",
-          "display: inline-block;opacity: 1"
-        );
-        })
-      
-    };
-
-    
 
   return (
     <div
@@ -74,12 +55,25 @@ function LoginBox() {
         </div>
         <h2 className={classes.title}>{t("loginPage")}</h2>
         <form onSubmit={handleSubmit(logIn)} noValidate>
-    
+    dhilhkxjhk
           <Input2
                 register={register("username",)}
                 label="name"
                 type="text"
                 onValueChange={(value) => setValue("username", value)}
+                placeholder="Enter User Name"
+                inputStyle={{
+                  padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
+                  minWidth: "100%"
+                }}
+
+              />
+               <Input2
+                register={register("email",)}
+                label="name"
+                type="text"
+                // value={"name"}
+                onValueChange={(value) => setValue("email", value)}
                 placeholder="Enter User Name"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
@@ -132,4 +126,4 @@ function LoginBox() {
   );
 }
 
-export default LoginBox;
+export default Registration;

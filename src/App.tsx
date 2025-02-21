@@ -8,6 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./scss/App.scss";
 
 import LocalStorageCRUD from "./pages/cr";
+import ForgotPass from "./components/forgotPass/ForgotPass";
+import Registration from "./components/registration/Registration";
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Customers = React.lazy(() => import("./pages/Customers"));
@@ -34,9 +36,16 @@ function App() {
               <Route path="/analytics" element={<BlankPage />} />
               <Route path="/discount" element={<BlankPage />} />
               <Route path="/inventory" element={<BlankPage />} />
+              <Route path="/inventory" element={<BlankPage />} />
+
+
             </Route>
           </Route>
           <Route path="/login" element={<Login />} />
+          <Route path="/forget-pass" element={<ForgotPass />} />
+          <Route path="/reg" element={<Registration />} />
+
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
