@@ -32,8 +32,11 @@ function LoginBox() {
         .then((resp) => {
           loginCtx.toggleLogin();
           navigate("/");   
-          getUser()    ;   
-        })
+
+          ReportService.getUser()
+          .then((resp) => {
+            localStorage.setItem("userInfo", JSON.stringify(resp?.data?.find((e:any) =>e?.username===data?.username)));
+          })        })
         .catch((err) => {
         errorMessageRef.current?.setAttribute(
           "style",

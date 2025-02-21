@@ -25,6 +25,7 @@ function Sidebar() {
 
   function logoutHandler() {
     openSidebarHandler();
+    localStorage.removeItem("userInfo"); // শুধুমাত্র "users" key ডিলিট করবে
     loginCtx.toggleLogin();
   }
   const navigate = useNavigate();
