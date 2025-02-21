@@ -8,6 +8,7 @@ import SidebarContext from "../../store/sidebarContext";
 import LoginContext from "../../store/loginContext";
 import { Icon } from "@iconify/react";
 import classes from "./Sidebar.module.scss";
+import ACLWrapper from "../ACL/Acl";
 
 function Sidebar() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -44,10 +45,12 @@ function Sidebar() {
       }`}
     >
       <div className={classes.sidebar__logo}>
-        <img src={images.logo} alt="digikala" />
+        {/* <img src={images.logo} alt="digikalaw" /> */}
       </div>
       <div className={classes.sidebar__menu}>
         {sidebarNav.map((nav, index) => (
+          <ACLWrapper visibleToRoles={nav.permissionRole}>
+            {/* {nav.permissionRole? */}
           <div
           
             key={`nav-${index}`}
@@ -65,6 +68,8 @@ function Sidebar() {
               {t(nav.section)}
             </div>
           </div>
+          {/* :null} */}
+          </ACLWrapper>
         ))}
       </div>
 

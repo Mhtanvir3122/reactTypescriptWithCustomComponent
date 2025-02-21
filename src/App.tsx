@@ -10,6 +10,9 @@ import "./scss/App.scss";
 import LocalStorageCRUD from "./pages/cr";
 import ForgotPass from "./components/forgotPass/ForgotPass";
 import Registration from "./components/registration/Registration";
+import Role from "./modules/role";
+import RoleAssign from "./modules/roleAsign";
+import ACLWrapper from "./components/ACL/Acl";
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Customers = React.lazy(() => import("./pages/Customers"));
@@ -21,6 +24,14 @@ const BlankPage = React.lazy(() => import("./pages/BlankPage"));
 const Login = React.lazy(() => import("./pages/Login"));
 
 function App() {
+
+//   let username = localStorage.getItem("userInfo")||"";
+//   let userInfo = JSON?.parse(username)||[];
+
+
+//   console.log(userInfo?.roles.map((e: any) => e?.name));
+
+// const userRole = userInfo?.roles.map((e: any) => e?.name); 
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingSpinner />}>
@@ -28,15 +39,14 @@ function App() {
           <Route element={<AuthLayout />}>
             <Route path="/" element={<MainLayout />}>
               <Route index element={<Dashboard />} />
-              <Route path="/customers" element={<Customers />} />
+              <Route path="/customers" element={<RoleAssign />} />
               <Route path="/customers/:customerId" element={<CustomerEdit />} />
               <Route path="/products" element={<Products />} />
               <Route path="/products/:productId" element={<ProductEdit />} />
               <Route path="/orders" element={<LocalStorageCRUD />} />
               <Route path="/analytics" element={<BlankPage />} />
-              <Route path="/discount" element={<BlankPage />} />
-              <Route path="/inventory" element={<BlankPage />} />
-              <Route path="/inventory" element={<BlankPage />} />
+              <Route path="/discount" element={<RoleAssign />} />
+              <Route path="/inventory" element={<Role />} />
 
 
             </Route>

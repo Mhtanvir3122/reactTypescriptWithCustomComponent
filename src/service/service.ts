@@ -60,4 +60,16 @@ export const ReportService = {
     
     getUser: async (): Promise<any> =>
         await axios.get( "http://localhost:8080/AuthService/auth/list"),
+
+    roleSave: async (payload:any): Promise<any> =>
+        await axios.post( "http://localhost:8080/AuthService/auth/roles", payload),
+
+    roleUpdate: async (payload:any,id: number): Promise<any> =>
+        await axios.put( "http://localhost:8080/AuthService/auth/roles"+`/${id}`, payload),
+
+    roleSearch: async (payload:any): Promise<any> =>
+        await axios.post( "http://localhost:8080/AuthService/auth/roles/search", payload),
+
+    deleteRole: async (id: number): Promise<any> =>
+        await axios.delete("http://localhost:8080/AuthService/auth/roles"+ `/${id}`),
 }
