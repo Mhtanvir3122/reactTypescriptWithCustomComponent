@@ -145,3 +145,52 @@ html[dir="rtl"] {
     }
   }
 }
+.sidebar__submenu {
+  padding-left: 30px;
+  margin-top: -30px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.sidebar__submenu__item {
+
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  position: relative;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &.active {
+    // background: var(--primaryColor);
+    color: #fff; // Active state text color white
+    font-weight: 600;
+    padding-left: 20px;
+
+    &::before {
+      content: "";
+      width: 4px;
+      height: 100%;
+      background-color: white;
+      position: absolute;
+      left: 0;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+  }
+
+  &__txt {
+    flex-grow: 1;
+    color: #000; // Initial text color black
+  }
+
+  // When item is active, change text color to red
+  &.active .sidebar__submenu__item__txt {
+    color: var(--primaryColor);
+  }
+}

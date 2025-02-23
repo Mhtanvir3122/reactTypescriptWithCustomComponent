@@ -12,6 +12,8 @@ import ACLWrapper from "../ACL/Acl";
 
 function Sidebar() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex2, setActiveIndex2] = useState<string | null>(null);
+
   const { width } = useWindowSize();
   const location = useLocation();
   const sidebarCtx = useContext(SidebarContext);
@@ -38,40 +40,81 @@ function Sidebar() {
     setActiveIndex(curPath.length === 0 ? 0 : activeItem);
   }, [location]);
 
+  const [openSubmenu, setOpenSubmenu] = useState(null);
+
+  const handleClick = (index: any, link: any, hasChildren: any) => {
+    setActiveIndex2(index);
+    if (hasChildren) {
+      setOpenSubmenu(openSubmenu === index ? null : index);
+    } else {
+      navigate(link);
+    }
+  };
+
   return (
     <div
-      className={`${classes.sidebar} ${
-        !sidebarCtx.isOpen && classes.sidebar_close
-      }`}
+      className={`${classes.sidebar} ${!sidebarCtx.isOpen && classes.sidebar_close
+        }`}
     >
       <div className={classes.sidebar__logo}>
         {/* <img src={images.logo} alt="digikalaw" /> */}
       </div>
       <div className={classes.sidebar__menu}>
-        {sidebarNav.map((nav, index) => (
-          <ACLWrapper visibleToRoles={nav.permissionRole}>
-            {/* {nav.permissionRole? */}
-          <div
-          
-            key={`nav-${index}`}
-            className={`${classes.sidebar__menu__item} ${
-              activeIndex === index && classes.active
-            }`}
-            // onClick={openSidebarHandler}
-            onClick={()=>{openSidebarHandler();  navigate(nav.link)
-            }}
-          >
-            <div className={classes.sidebar__menu__item__icon}>
-              <Icon icon={nav.icon} />
+        {sidebarNav.map((nav: any, index: any) => (
+          <ACLWrapper key={`nav-${index}`} visibleToRoles={nav.permissionRole}>
+            <div>
+              <div
+                className={`${classes.sidebar__menu__item} ${activeIndex === index && classes.active
+                  }`}
+                onClick={() => handleClick(index, nav.link, nav.children?.length)}
+              >
+                <div className={classes.sidebar__menu__item__icon}>
+                  <Icon icon={nav.icon} />
+                </div>
+                <div className={classes.sidebar__menu__item__txt}>
+                  {t(nav.section)}
+                </div>
+                {nav.children && (
+                  <div className={classes.sidebar__menu__item__arrow}>
+                    <Icon icon={openSubmenu === index ? "mdi:chevron-down" : "mdi:chevron-right"} />
+                  </div>
+                )}
+              </div>
+
+              {nav.children && openSubmenu === index && (
+                <div className={classes.sidebar__submenu}>
+                  {nav.children.map((subNav: any, subIndex: any) => (
+                    <ACLWrapper key={`subNav-${subIndex}`} visibleToRoles={subNav.permissionRole}>
+                      <div
+                        className={`${classes.sidebar__submenu__item} ${activeIndex2 === `${index}-${subIndex}` ? classes.active : ''
+                          }`}
+                        onClick={() => {
+                          setActiveIndex2(`${index}-${subIndex}`);
+                          navigate(subNav.link);
+                        }}
+                      >
+                        <div className={`${classes.sidebar__submenu__item__txt} ${activeIndex2 === `${index}-${subIndex}` ? classes.activeText : ''}`}>
+
+                          <div className="d-flex">
+                            <div className={classes.sidebar__menu__item__icon}>
+                              <Icon icon={nav.icon} />
+                            </div>
+                            {t(subNav.section)}
+                          </div>
+                        </div>
+                      </div>
+                    </ACLWrapper>
+                  ))}
+                </div>
+              )}
+
             </div>
-            <div className={classes.sidebar__menu__item__txt}>
-              {t(nav.section)}
-            </div>
-          </div>
-          {/* :null} */}
           </ACLWrapper>
+
+
         ))}
       </div>
+
 
       <div className={[classes.sidebar__menu, classes.logout].join("")}>
         <Link
