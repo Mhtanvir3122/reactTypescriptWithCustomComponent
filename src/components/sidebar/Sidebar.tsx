@@ -97,7 +97,7 @@ function Sidebar() {
 
                           <div className="d-flex">
                             <div className={classes.sidebar__menu__item__icon}>
-                              <Icon icon={nav.icon} />
+                              <Icon icon={subNav.icon} />
                             </div>
                             {t(subNav.section)}
                           </div>

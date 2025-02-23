@@ -29,7 +29,7 @@ const sidebarNav = [
       {
         link: "/discount",
         section: "analytics",
-        icon: "carbon:analytics",
+        icon: "solar:accessibility-bold",
         text: "Analytics",
         permissionRole: ["ADMIN"],
       },     

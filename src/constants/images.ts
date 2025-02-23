@@ -4,7 +4,6 @@ const images = {
   logKey: require("../assets/images/Reset password-pana.svg"),
   dashboard: require("../assets/images/Revenue-cuate.svg"),
   notFound: require("../assets/images/Oops 404 Error with a broken robot-cuate.svg"),
-  registration: require("../assets/images/registration.png"),
 
 };
 
