@@ -30,13 +30,12 @@ function LoginBox() {
   const logIn = (data:any) => {
       ReportService.logIn({...data})
         .then((resp) => {
-          loginCtx.toggleLogin();
-          navigate("/");   
-
+          
           ReportService.getUser()
           .then((resp) => {
             localStorage.setItem("userInfo", JSON.stringify(resp?.data?.find((e:any) =>e?.username===data?.username)));
-
+            loginCtx.toggleLogin();
+            navigate("/");  
             
           })        })
         .catch((err) => {

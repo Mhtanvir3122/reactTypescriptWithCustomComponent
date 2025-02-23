@@ -25,13 +25,6 @@ const Login = React.lazy(() => import("./pages/Login"));
 
 function App() {
 
-//   let username = localStorage.getItem("userInfo")||"";
-//   let userInfo = JSON?.parse(username)||[];
-
-
-//   console.log(userInfo?.roles.map((e: any) => e?.name));
-
-// const userRole = userInfo?.roles.map((e: any) => e?.name); 
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingSpinner />}>

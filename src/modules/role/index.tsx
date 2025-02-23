@@ -23,8 +23,6 @@ const Role = () => {
   const [searchKey, setSearchKey] = useState<any>();
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Output: [["USER", "ADMIN"], ["USER"]]
     
   
   useEffect(() => {
@@ -43,7 +41,6 @@ const Role = () => {
     } = useForm();
 
   const getEmployeeList = () => {
-    console.log(getValues());
 
     ReportService.roleSearch({ keyword: searchKey })
       .then((resp) => {
