@@ -6,36 +6,47 @@ const sidebarNav = [
     text: "Dashboard",
     permissionRole: ["USER_ROLE"],
   },
+
   {
-    section: "products",
-    icon: "icon-park-outline:ad-product",
-    text: "Products",
-    permissionRole: ["USER_ROLE"],
-    
-  },
-  {
-    link: "/customers",
+    link: "/orders",
     section: "customers",
     icon: "ph:users-bold",
     text: "Customers",
     permissionRole: ["USER_ROLE"],
   },
+  
   {
-    section: "orders",
+    link: "/analytics",
+    section: "analytics",
+    icon: "carbon:analytics",
+    text: "Analytics",
+    permissionRole: ["ADMIN","USER_ROLE",],
+  },
+
+  {
+    link: "/",
+    section: "inventory",
+    icon: "ic:round-inventory",
+    text: "Inventory",
+    permissionRole: ["USER_ROLE", "ADMIN"],
+  },
+
+  {
+    section: "ACL",
     icon: "icon-park-outline:transaction-order",
     text: "Orders",
     permissionRole: ["USER_ROLE"],
     children: [
       {
-        link: "/discount",
-        section: "analytics",
+        link: "/role",
+        section: "Role",
         icon: "solar:accessibility-bold",
         text: "Analytics",
         permissionRole: ["ADMIN"],
       },     
       {
-        link: "/discount",
-        section: "analytics",
+        link: "/role-assign",
+        section: "Role Assign",
         icon: "carbon:analytics",
         text: "Analytics",
         permissionRole: ["ADMIN"],
@@ -43,25 +54,26 @@ const sidebarNav = [
     ],
   },
   {
-    link: "/analytics",
-    section: "analytics",
-    icon: "carbon:analytics",
-    text: "Analytics",
-    permissionRole: ["ADMIN"],
-  },
-  // {
-  //   link: "/discount",
-  //   section: "discount",
-  //   icon: "nimbus:discount-circle",
-  //   text: "Discount",
-  //   permissionRole: ["ADMIN"],
-  // },
-  {
-    link: "/inventory",
-    section: "inventory",
-    icon: "ic:round-inventory",
-    text: "Inventory",
-    permissionRole: ["USER_ROLE", "ADMIN"],
+    section: "Role",
+    icon: "icon-park-outline:transaction-order",
+    text: "Orders",
+    permissionRole: ["USER_ROLE"],
+    children: [
+      {
+        link: "/role",
+        section: "Role",
+        icon: "solar:accessibility-bold",
+        text: "Analytics",
+        permissionRole: ["ADMIN"],
+      },     
+      {
+        link: "/role-assign",
+        section: "Role Assign",
+        icon: "carbon:analytics",
+        text: "Analytics",
+        permissionRole: ["ADMIN"],
+      }
+    ],
   },
 ];
 
