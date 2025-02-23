@@ -39,7 +39,7 @@ const sidebarNav = [
     children: [
       {
         link: "/role",
-        section: "Role",
+        section: "Url",
         icon: "solar:accessibility-bold",
         text: "Analytics",
         permissionRole: ["ADMIN"],
