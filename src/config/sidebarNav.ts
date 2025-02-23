@@ -11,7 +11,6 @@ const sidebarNav = [
     link: "/orders",
     section: "customers",
     icon: "ph:users-bold",
-    text: "Customers",
     permissionRole: ["USER_ROLE"],
   },
   
@@ -19,7 +18,6 @@ const sidebarNav = [
     link: "/analytics",
     section: "analytics",
     icon: "carbon:analytics",
-    text: "Analytics",
     permissionRole: ["ADMIN","USER_ROLE",],
   },
 
@@ -27,51 +25,46 @@ const sidebarNav = [
     link: "/",
     section: "inventory",
     icon: "ic:round-inventory",
-    text: "Inventory",
     permissionRole: ["USER_ROLE", "ADMIN"],
   },
 
   {
     section: "ACL",
+    link: "/",
     icon: "icon-park-outline:transaction-order",
-    text: "Orders",
     permissionRole: ["USER_ROLE"],
     children: [
       {
-        link: "/role",
+        link: "/url",
         section: "Url",
         icon: "solar:accessibility-bold",
-        text: "Analytics",
         permissionRole: ["ADMIN"],
       },     
       {
         link: "/role-assign",
         section: "Role Assign",
         icon: "carbon:analytics",
-        text: "Analytics",
         permissionRole: ["ADMIN"],
       }
     ],
   },
   {
     section: "Role",
+    link: "/",
     icon: "icon-park-outline:transaction-order",
-    text: "Orders",
     permissionRole: ["USER_ROLE"],
     children: [
       {
         link: "/role",
         section: "Role",
         icon: "solar:accessibility-bold",
-        text: "Analytics",
-        permissionRole: ["ADMIN"],
+        permissionRole: ["USER_ROLE"],
       },     
       {
         link: "/role-assign",
         section: "Role Assign",
         icon: "carbon:analytics",
-        text: "Analytics",
-        permissionRole: ["ADMIN"],
+        permissionRole: ["USER_ROLE"],
       }
     ],
   },

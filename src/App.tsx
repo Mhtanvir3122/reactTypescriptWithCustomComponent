@@ -12,6 +12,7 @@ import Registration from "./components/registration/Registration";
 import Role from "./modules/role";
 import RoleAssign from "./modules/roleAsign";
 import LocalStorageCRUD from "./pages/cr";
+import URL from "./modules/Url";
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
@@ -31,6 +32,8 @@ function App() {
               <Route path="/analytics" element={<BlankPage />} />
               <Route path="/role-assign" element={<RoleAssign />} />
               <Route path="/role" element={<Role />} />
+              <Route path="/url" element={<URL />} />
+
 
 
             </Route>

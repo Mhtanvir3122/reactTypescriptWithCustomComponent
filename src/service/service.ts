@@ -78,5 +78,8 @@ export const ReportService = {
     assignRole: async (id: number,payload:any): Promise<any> =>
         await axios.post("http://localhost:8080/AuthService/auth"+ `/${id}/assign-roles`,payload),
 
+    routeConfigSave: async (payload:any): Promise<any> =>
+        await axios.post( "http://localhost:8080/AuthService/auth/route-configs", payload),
+
     
 }
