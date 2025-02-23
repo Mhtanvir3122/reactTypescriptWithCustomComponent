@@ -6,6 +6,7 @@ import SearchBox from "../../components/topnav/searchBox/SearchBox";
 import { ReportService } from "../../service/service";
 import RoleForm from "./Form";
 import RoleTable from "./Table";
+import { useForm } from "react-hook-form";
 
 
 interface Employee {
@@ -31,7 +32,19 @@ const Role = () => {
 
   }, [searchKey]);
 
+  const {
+      register,
+      handleSubmit,
+      reset,
+      getValues, watch,
+      control,
+      setValue,
+      formState: { errors },
+    } = useForm();
+
   const getEmployeeList = () => {
+    console.log(getValues());
+
     ReportService.roleSearch({ keyword: searchKey })
       .then((resp) => {
         setData(resp);

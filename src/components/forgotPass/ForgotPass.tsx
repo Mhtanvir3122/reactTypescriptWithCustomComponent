@@ -51,18 +51,17 @@ function ForgotPass() {
       }`}
     >
       <div className={classes.loginBox}>
-        <div className={classes.logo}>
+        {/* <div className={classes.logo}>
           <img src={images.logo} alt="digikala" />
-        </div>
-        <h2 className={classes.title}>{t("loginPage")}</h2>
+        </div> */}
+        <h2 style={{fontSize:35}} className={classes.title}>{t("Change Password")}</h2>
         <form onSubmit={handleSubmit(logIn)} noValidate>
-    hjsjgsgjgh
           <Input2
                 register={register("email",)}
-                label="name"
+                label="Email"
                 type="text"
                 onValueChange={(value) => setValue("email", value)}
-                placeholder="Enter User Name"
+                placeholder="Enter Email"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
                   minWidth: "100%"
@@ -72,11 +71,11 @@ function ForgotPass() {
         
           <Input2
                 register={register("newPassword",)}
-                label="name"
+                label="New Password"
                 type="text"
                 // value={"name"}
                 onValueChange={(value) => setValue("newPassword", value)}
-                placeholder="Enter User Name"
+                placeholder="Enter New Password"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
                   minWidth: "100%"
@@ -86,13 +85,11 @@ function ForgotPass() {
           <span  ref={errorMessageRef} className={classes.errorMessage}>
             {t("notMatch")}
           </span>
-          <Button type="submit">{t("login")}</Button>
-          <Link className={classes.forgat_pass} to="/forget-pass">
-            {t("forgetPass")}
-          </Link>
+          <Button type="submit">{t("Submit")}</Button>
           <br />
-          <Link className={classes.forgat_pass} to="/reg">
-            {t("Create New Account")}
+
+          <Link className={classes.forgat_pass} to="/login">
+            {t("Back")}
           </Link>
           {/* <div className={classes.checkbox}>
             <input type="checkbox" id="rememberMe" />

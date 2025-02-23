@@ -74,15 +74,15 @@ function LoginBox() {
       }`}
     >
       <div className={classes.loginBox}>
-        <div className={classes.logo}>
+        {/* <div className={classes.logo}>
           <img src={images.logo} alt="digikala" />
-        </div>
-        <h2 className={classes.title}>{t("loginPage")}</h2>
+        </div> */}
+        <h2 className={classes.title}>{t("Login")}</h2>
         <form onSubmit={handleSubmit(logIn)} noValidate>
     
           <Input2
                 register={register("username",)}
-                label="name"
+                label="User Name"
                 type="text"
                 onValueChange={(value) => setValue("username", value)}
                 placeholder="Enter User Name"
@@ -95,11 +95,11 @@ function LoginBox() {
         
           <Input2
                 register={register("password",)}
-                label="name"
+                label="Password"
                 type="text"
                 // value={"name"}
                 onValueChange={(value) => setValue("password", value)}
-                placeholder="Enter User Name"
+                placeholder="Enter Password"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
                   minWidth: "100%"

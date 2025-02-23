@@ -51,16 +51,15 @@ function Registration() {
     >
       <div className={classes.loginBox}>
         <div className={classes.logo}>
-          <img src={images.logo} alt="digikala" />
+          {/* <img src={images.registration} alt="digikala" /> */}
         </div>
-        <h2 className={classes.title}>{t("loginPage")}</h2>
+        <h2 className={classes.title}>{t("Registration")}</h2>
         <form onSubmit={handleSubmit(logIn)} noValidate>
-    dhilhkxjhk
           <Input2
                 register={register("username",)}
-                label="name"
+                label="User Name"
                 type="text"
-                onValueChange={(value) => setValue("username", value)}
+                onValueChange={(value) => setValue("username", value)} 
                 placeholder="Enter User Name"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
@@ -70,11 +69,11 @@ function Registration() {
               />
                <Input2
                 register={register("email",)}
-                label="name"
+                label="Email"
                 type="text"
                 // value={"name"}
                 onValueChange={(value) => setValue("email", value)}
-                placeholder="Enter User Name"
+                placeholder="Enter Email"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
                   minWidth: "100%"
@@ -84,11 +83,11 @@ function Registration() {
         
           <Input2
                 register={register("password",)}
-                label="name"
+                label="Password"
                 type="text"
                 // value={"name"}
                 onValueChange={(value) => setValue("password", value)}
-                placeholder="Enter User Name"
+                placeholder="Enter Password"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
                   minWidth: "100%"
@@ -98,30 +97,17 @@ function Registration() {
           <span  ref={errorMessageRef} className={classes.errorMessage}>
             {t("notMatch")}
           </span>
-          <Button type="submit">{t("login")}</Button>
-          <Link className={classes.forgat_pass} to="/forget-pass">
-            {t("forgetPass")}
-          </Link>
+          <Button type="submit">{t("Submit")}</Button>
           <br />
-          <Link className={classes.forgat_pass} to="/reg">
-            {t("Create New Account")}
-          </Link>
-          {/* <div className={classes.checkbox}>
-            <input type="checkbox" id="rememberMe" />
-            <label htmlFor="rememberMe">{t("rememberMe")}</label>
 
-          </div> */}
+          <Link className={classes.forgat_pass} to="/login">
+            {t("Back")}
+          </Link>
+         
         </form>
       </div>
 
-      {/* <div className={classes.keyPic}>
-        <div className="p-9">
-        <img
-          src={require("../../assets/images/22.jpg")}
-          alt="illustrator key"
-        />
-        </div>
-      </div> */}
+    
     </div>
   );
 }

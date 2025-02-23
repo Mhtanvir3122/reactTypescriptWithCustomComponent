@@ -17,6 +17,8 @@ interface Employee {
 const RoleAssign = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<any>();
+  const [roleData, setRoleData] = useState<any>();
+
   const [data2, setData2] = useState<any>();
   const [updatedData, setUpdatedData] = useState<any>();
   const [searchKey, setSearchKey] = useState<any>();
@@ -30,7 +32,7 @@ const RoleAssign = () => {
   }, [searchKey]);
 
   const getEmployeeList = () => {
-    ReportService.roleSearch({ keyword: searchKey })
+    ReportService.registrationEmpList({ keyword: searchKey })
       .then((resp) => {
         setData(resp);
       })
@@ -41,12 +43,29 @@ const RoleAssign = () => {
       });
   };
 
-  const onSubmit = (e: any) => {
-    updatedData?
-    ReportService.roleUpdate(  e ,updatedData?.id): ReportService.roleSave({ ...e })
+  useEffect(() => {
+    getRoleList ();
+
+  }, []);
+
+  const getRoleList = () => {
+    ReportService.roleSearch({ keyword: "" })
       .then((resp) => {
-        setData(resp?.data);
-        console.log(resp);
+        setRoleData(resp?.data);
+      })
+      .catch((err) => {
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const onSubmit = (e: any) => {
+    console.log(e);
+    
+    ReportService.assignRole(  updatedData?.id,e?.roles?.map((e: any) => e?.value) )
+      .then((resp) => {
+        getEmployeeList();
         
       })
       .catch((err) => {
@@ -98,9 +117,9 @@ const RoleAssign = () => {
         {!isDrawerOpen ? <>
           <SearchBox searchKey={setSearchKey} />
           <div className="d-flex justify-content-end mt-4 mb-3">
-            <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
+            {/* <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
               যুক্ত করুন
-            </Button>
+            </Button> */}
           </div>
         </>
 
@@ -112,6 +131,7 @@ const RoleAssign = () => {
           updateData={updatedData}
           onSubmit={onSubmit}
           submitLoading={true}
+          roleData={roleData}
         />
         {!isDrawerOpen ?
 

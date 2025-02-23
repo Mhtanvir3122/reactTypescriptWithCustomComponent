@@ -3,9 +3,9 @@ import React from "react";
 
 interface Item {
   id: string;
-  name: string;
+  username: string;
   email: string;
-  department: string;
+  roles: [];
 }
 
 interface Props {
@@ -23,15 +23,23 @@ const RoleAssignTable: React.FC<Props> = ({ visibleData, handleEditItem, handleD
           <th>No</th>
           
           <th>Role Name</th>
+          <th>Email</th>
+          <th>ROLES</th>
+
+
           <th style={{ width: 200 }}>Action</th>
         </tr>
       </thead>
       <tbody>
       {visibleData?.map((item, key) => (
-          <tr key={item.id}>
+          <tr key={item.id}> 
             <td>{key + 1}</td>
-            <td>{item.name}</td>
-          
+            <td>{item?.username}</td>
+            <td>{item?.email}</td>
+            <td>{item?.roles?.map((e:any)=>e?.name).join(', ')}</td>
+
+
+            
             <td>
               <div
                 className="d-flex justify-content-center"
@@ -43,7 +51,7 @@ const RoleAssignTable: React.FC<Props> = ({ visibleData, handleEditItem, handleD
                 >
                   Edit
                 </button>
-                <button
+                {/* <button
                   onClick={() => handleDeleteItem(Number(item.id))}
                   style={{
                     padding: "5px 10px",
@@ -53,7 +61,7 @@ const RoleAssignTable: React.FC<Props> = ({ visibleData, handleEditItem, handleD
                   }}
                 >
                   Delete <Icon icon="delete"/>
-                </button> 
+                </button>  */}
               </div>
             </td>
           </tr>

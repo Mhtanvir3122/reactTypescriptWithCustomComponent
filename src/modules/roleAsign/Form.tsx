@@ -1,13 +1,16 @@
 
 
 import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Drawer from "../../components/Drawer";
 import DrawerBody from "../../components/Drawer/DrawerBody";
 import DrawerFooter from "../../components/Drawer/DrawerFooter";
 import Button from "../../components/UI/button/Button";
 import TextArea from "../../components/UI/input/textArea";
 import Input2 from "../../components/UI/input/Input2";
+import Input from "../../components/UI/input/Input";
+import SearchableSelect from "../../components/UI/Select/new";
+import Select from "react-select/dist/declarations/src/Select";
 const initPayload = {
   meta: {
     page: 0,
@@ -21,6 +24,7 @@ interface IRoleForm {
   onClose: () => void;
   updateData?: any;
   submitLoading?: boolean;
+  roleData?: any
 }
 
 const RoleAssignForm = ({
@@ -28,26 +32,32 @@ const RoleAssignForm = ({
   onClose,
   onSubmit,
   updateData,
-  submitLoading,
+  submitLoading, roleData
 }: IRoleForm) => {
 
   const {
     register,
     handleSubmit,
     reset,
-    getValues,
+    getValues, watch,
     control,
     setValue,
     formState: { errors },
   } = useForm();
 
-useEffect(() => {
-  if (isOpen && updateData) {
-    reset({...updateData});
-  } else  reset({updateData});
+  useEffect(() => {
+    if (isOpen && updateData) {
+      reset({
+        ...updateData, roles: updateData?.roles?.map((item: any) => ({
+          value: item.id,
+          label: item.name
+        }))
+      });
+    } else reset({ updateData });
 
-  // eslint-disable-next-line
-}, [isOpen, updateData,reset]);
+    // eslint-disable-next-line
+  }, [isOpen, updateData, reset]);
+
 
   return (
     <Drawer
@@ -62,24 +72,41 @@ useEffect(() => {
           <div className="row">
             <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
               <Input2
-                register={register("name",)}
-                label="name"
+                register={register("username",)}
+                label="username"
+                disabled
                 type="text"
-                // value={"name"}
-                onValueChange={(value) => setValue("name", value)}
-                placeholder="Enter User Name"
+                // value={"username"}
+                onValueChange={(value) => setValue("username", value)}
+                placeholder="Enter User username"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
                   minWidth: "100%"
                 }}
 
               />
-
             </div>
-          
+            {/* <SearchableSelect options={roleData || []} onChange={(e: any) => setValue('roleID', e?.map((e: any) => e?.value))
 
-          </div>        
-          </DrawerBody>
+
+            } /> */}
+            <Controller
+              control={control}
+              name="roles"
+              render={({ field }) => (
+                <SearchableSelect
+                  {...field} // Pass the field props to the SearchableSelect
+                  options={roleData}
+                  // onChange={(e: any) => setValue('roleID', e?.map((e: any) => e?.value))}
+                  defaultValue={watch('roles')} 
+                  setValue={setValue}
+                  />
+              )}
+            />
+
+
+          </div>
+        </DrawerBody>
 
         <DrawerFooter>
           <div className="d-flex gap-3 justify-content-end">

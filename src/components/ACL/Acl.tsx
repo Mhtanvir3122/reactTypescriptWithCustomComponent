@@ -21,7 +21,6 @@ const ACLWrapper: React.FC<ACLWrapperProps> = ({ visibleToRoles, children }) => 
   ? userInfo.roles.map((e: any) => e?.name) 
   : [];
 
-// const userRole = userInfo?.roles.map((e: any) => e?.name); 
   
   useEffect(() => {
     getEmployeeList();

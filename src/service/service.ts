@@ -54,6 +54,8 @@ export const ReportService = {
 
     registration: async (payload:any): Promise<any> =>
         await axios.post( "http://localhost:8080/AuthService/auth/register", payload),
+    registrationEmpList: async (payload:any): Promise<any> =>
+        await axios.post( "http://localhost:8080/AuthService/auth/search", payload),
 
     forgotPass: async (payload:any): Promise<any> =>
         await axios.post( "http://localhost:8080/AuthService/auth/forgot-password", payload),
@@ -72,4 +74,9 @@ export const ReportService = {
 
     deleteRole: async (id: number): Promise<any> =>
         await axios.delete("http://localhost:8080/AuthService/auth/roles"+ `/${id}`),
+
+    assignRole: async (id: number,payload:any): Promise<any> =>
+        await axios.post("http://localhost:8080/AuthService/auth"+ `/${id}/assign-roles`,payload),
+
+    
 }
