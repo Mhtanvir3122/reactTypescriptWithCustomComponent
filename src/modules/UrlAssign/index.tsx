@@ -15,7 +15,7 @@ interface Employee {
   email: string;
 }
 
-const URL = () => {
+const UrlAssign = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<any>();
   const [data2, setData2] = useState<any>();
@@ -23,22 +23,23 @@ const URL = () => {
   const [searchKey, setSearchKey] = useState<any>();
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-    
-  
+
+  const [roleData, setRoleData] = useState<any>();
+
   useEffect(() => {
     getEmployeeList();
 
   }, [searchKey]);
 
   const {
-      register,
-      handleSubmit,
-      reset,
-      getValues, watch,
-      control,
-      setValue,
-      formState: { errors },
-    } = useForm();
+    register,
+    handleSubmit,
+    reset,
+    getValues, watch,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
   const getEmployeeList = () => {
 
@@ -53,31 +54,23 @@ const URL = () => {
       });
   };
 
+  const onSubmit = (e: any) => {
+    updatedData?.sub ?
 
-    
+      ReportService.routeConfigAssignChild(updatedData?.id, e?.roles?.map((e: any) => e?.value)) :
+      ReportService.routeConfigAssign(updatedData?.id, e?.roles?.map((e: any) => e?.value))
 
-      const onSubmit = (e: any) => {
-        delete e.permissionRole
-        delete e.id
+        .then((resp) => {
+          setData(resp?.data);
+          console.log(resp);
 
-        updatedData?.menu?
-        ReportService?.routeConfigUpdate( { children:[e],...e},updatedData?.id):
-        updatedData?.edit?
-        ReportService?.routeConfigUpdate2(updatedData?.id,e):
-        updatedData?.subMenu?
-        ReportService.routeConfigUpdatedd(e,updatedData?.id)
-        :
-        ReportService.routeConfigSave({ ...e })
-           .then((resp) => {
-             setData(resp?.data);
-             console.log(resp);
-             
-           })
-           .catch((err) => {
-           })
-           .finally(() => {
-             setLoading(false);
-           });
+        })
+        .catch((err) => {
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+
 
     onDrawerClose();
 
@@ -90,11 +83,14 @@ const URL = () => {
 
 
   };
+
+
+  
   const handlePageChange = (visibleData: any[], page: number, limit: number) => {
     setData2(visibleData);
   };
 
-  const handleEditItem = (id: string) => {
+  const handleEditItem = (id: any) => {
     setIsDrawerOpen(true);
     setUpdatedData(id)
 
@@ -102,17 +98,29 @@ const URL = () => {
 
   };
 
-  const handleDeleteItem = (e: any) => {
-    console.log(e);
-    
-    e?.submenu?
-    ReportService.routeConfigDelete(e?.id):
-    ReportService.routeConfigDeleteParent(e)
+  const handleDeleteItem = (e: number) => {
+    ReportService.deleteRole(e)
       .then((res) => {
         getEmployeeList();
       })
   };
 
+  useEffect(() => {
+    getRoleList ();
+
+
+  }, []);
+
+
+  const getRoleList = () => {
+    ReportService.roleSearch({ keyword: "" })
+      .then((resp) => {
+        setRoleData(resp?.data );
+      })
+      .catch((err) => {
+      })
+      ;
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
@@ -139,6 +147,7 @@ const URL = () => {
           updateData={updatedData}
           onSubmit={onSubmit}
           submitLoading={true}
+          data={roleData}
         />
         {!isDrawerOpen ?
 
@@ -170,4 +179,4 @@ const URL = () => {
 
 
 
-export default URL;
+export default UrlAssign;

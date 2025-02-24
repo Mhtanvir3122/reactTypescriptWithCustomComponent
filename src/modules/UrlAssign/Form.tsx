@@ -23,6 +23,8 @@ interface IRoleForm {
   onClose: () => void;
   updateData?: any;
   submitLoading?: boolean;
+  data?:any;
+
 }
 
 const RoleForm = ({
@@ -31,6 +33,7 @@ const RoleForm = ({
   onSubmit,
   updateData,
   submitLoading,
+  data,
 }: IRoleForm) => {
 
   const {
@@ -44,33 +47,21 @@ const RoleForm = ({
   } = useForm();
 
   useEffect(() => {
-    if (isOpen && updateData && !updateData?.menu) {
-      
+    if (isOpen && updateData) {
       reset({
-        ...updateData
+        ...updateData, permissionRole: updateData?.permissionRole?.map((item: any) => ({
+          value: item.id,
+          label: item.name
+        }))
       });
-    } else reset({  });
+    } else reset({ updateData });
 
     // eslint-disable-next-line
   }, [isOpen, updateData, reset]);
-  useEffect(() => {
-    getRoleList ();
 
-  }, []);
-
+  
   console.log(updateData);
   
-  const [roleData, setRoleData] = useState<any>();
-
-  const getRoleList = () => {
-    ReportService.roleSearch({ keyword: "" })
-      .then((resp) => {
-        setRoleData(resp?.data);
-      })
-      .catch((err) => {
-      })
-      ;
-  };
 
   return (
     <Drawer
@@ -133,7 +124,19 @@ const RoleForm = ({
 
             </div>
 
-          
+            <Controller
+              control={control}
+              name="permissionRole"
+              render={({ field }) => (
+                <SearchableSelect
+                  {...field} // Pass the field props to the SearchableSelect
+                  options={updateData?.sub?updateData?.DTO:data||[]}
+                  // onChange={(e: any) => setValue('roleID', e?.map((e: any) => e?.value))}
+                  defaultValue={watch('permissionRole')} 
+                  setValue={setValue}
+                  />
+              )}
+            />
           
 
           </div>        

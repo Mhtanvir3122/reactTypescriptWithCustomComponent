@@ -55,30 +55,20 @@ const RoleTable: React.FC<Props> = ({ visibleData, handleEditItem, handleDeleteI
 
 
             
-            <td>{item?.children?.map((item: any, key) => (
+            <td>{item?.children?.map((item2: any, key) => (
               <tr key={item.id}>
                 <td>{key + 1}</td>
-                <td>{item?.icon}</td>
-                <td>{item?.link}</td>
-                <td>{item?.section}</td>
+                <td>{item2?.icon}</td>
+                <td>{item2?.link}</td>
+                <td>{item2?.section}</td>
                 <td><button
-                  onClick={() => handleEditItem({...item?.id,'subMenu':true})}
+                  onClick={() => handleEditItem({...item2,sub:true ,DTO:item?.permissionRole})}
                   style={{ marginRight: "10px", padding: "5px 10px" }}
                 >
                   Edit
                 </button>
                 
-                <button
-                  onClick={() => handleDeleteItem({...item,'submenu':true})}
-                  style={{
-                    padding: "5px 10px",
-                    backgroundColor: "#f44336",
-                    color: "white",
-                    border: "none",
-                  }}
-                >
-                  Delete <Icon icon="delete" />
-                </button>
+               
                 
                 </td>
 
@@ -93,7 +83,7 @@ const RoleTable: React.FC<Props> = ({ visibleData, handleEditItem, handleDeleteI
                 style={{ marginTop: "10px" }}
               >
                 <button
-                  onClick={() => handleEditItem({...item ,'menu':true})}
+                  onClick={() => handleEditItem(item )}
                   style={{ marginRight: "10px", padding: "5px 10px" }}
                 >
                   Sub Menu Added
@@ -109,22 +99,12 @@ const RoleTable: React.FC<Props> = ({ visibleData, handleEditItem, handleDeleteI
                 style={{ marginTop: "10px" }}
               >
                 <button
-                  onClick={() => handleEditItem({...item, edit:true})}
+                  onClick={() => handleEditItem(item)}
                   style={{ marginRight: "10px", padding: "5px 10px" }}
                 >
                   Edit
                 </button>
-                <button
-                  onClick={() => handleDeleteItem(Number(item.id))}
-                  style={{
-                    padding: "5px 10px",
-                    backgroundColor: "#f44336",
-                    color: "white",
-                    border: "none",
-                  }}
-                >
-                  Delete <Icon icon="delete" />
-                </button>
+                
               </div>
             </td>
           </tr>

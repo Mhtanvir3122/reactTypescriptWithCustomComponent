@@ -81,5 +81,38 @@ export const ReportService = {
     routeConfigSave: async (payload:any): Promise<any> =>
         await axios.post( "http://localhost:8080/AuthService/auth/route-configs", payload),
 
+    routeConfigUpdate: async (payload:any,id: number): Promise<any> =>
+        await axios.post( "http://localhost:8080/AuthService/auth/route-configs/"+`${id}/add-child`, payload),
+
+    
+
+    routeConfigAssign: async (id: number,payload:any): Promise<any> =>
+        await axios.post( "http://localhost:8080/AuthService/auth/route-configs"+`/${id}/assign-roles-route`, payload),
+
+
+    
+    routeConfigAssignChild: async (id: number,payload:any): Promise<any> =>
+        await axios.post( "http://localhost:8080/AuthService/auth/route-configs"+`/${id}/assign-roles-route-child`, payload),
+
+
+    routeGet: async (): Promise<any> =>
+        await axios.get( "http://localhost:8080/AuthService/auth/route-configs",),
+
+    routeGetList: async (): Promise<any> =>
+        await axios.get( "http://localhost:8080/AuthService/auth/route-configs/list",),
+
+    routeConfigUpdate2: async (id: number,payload:any): Promise<any> =>
+        await axios.put( "http://localhost:8080/AuthService/auth/route-configs/update"+`/${id}`, payload),
+
+
+    routeConfigUpdatedd: async (payload:any,id: number): Promise<any> =>
+        await axios.put( "http://localhost:8080/AuthService/auth/route-configs/child/"+`${id}`, payload),
+
+    routeConfigDelete: async (id: number): Promise<any> =>
+        await axios.delete( "http://localhost:8080/AuthService/auth/route-configs/child/"+`${id}`),
+
+    routeConfigDeleteParent: async (id: number): Promise<any> =>
+        await axios.delete( "http://localhost:8080/AuthService/auth/route-configs/parent/"+`${id}`),
+
     
 }

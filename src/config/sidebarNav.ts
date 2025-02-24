@@ -41,7 +41,7 @@ const sidebarNav = [
         permissionRole: ["ADMIN"],
       },     
       {
-        link: "/role-assign",
+        link: "/url-assign",
         section: "Role Assign",
         icon: "carbon:analytics",
         permissionRole: ["ADMIN"],
