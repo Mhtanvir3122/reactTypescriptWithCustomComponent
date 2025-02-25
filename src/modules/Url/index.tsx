@@ -97,6 +97,7 @@ const URL = () => {
   const handleEditItem = (id: string) => {
     setIsDrawerOpen(true);
     setUpdatedData(id)
+    
 
 
 
@@ -119,7 +120,7 @@ const URL = () => {
 
   return (
     <div>
-      <h2>Role List</h2>
+      <h2>Menu Create</h2>
 
       <Card>
         {!isDrawerOpen ? <>

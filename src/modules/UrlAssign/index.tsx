@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import Card from "../../components/UI/card/Card";
 import Pagination from "../../components/pazinationWithLimit/pazinationWithLimit";
 import SearchBox from "../../components/topnav/searchBox/SearchBox";
 import { ReportService } from "../../service/service";
 import RoleForm from "./Form";
 import RoleTable from "./Table";
-import { useForm } from "react-hook-form";
 
 
 interface Employee {
@@ -85,7 +84,7 @@ const UrlAssign = () => {
   };
 
 
-  
+
   const handlePageChange = (visibleData: any[], page: number, limit: number) => {
     setData2(visibleData);
   };
@@ -106,7 +105,7 @@ const UrlAssign = () => {
   };
 
   useEffect(() => {
-    getRoleList ();
+    getRoleList();
 
 
   }, []);
@@ -115,7 +114,7 @@ const UrlAssign = () => {
   const getRoleList = () => {
     ReportService.roleSearch({ keyword: "" })
       .then((resp) => {
-        setRoleData(resp?.data );
+        setRoleData(resp?.data);
       })
       .catch((err) => {
       })
@@ -127,16 +126,12 @@ const UrlAssign = () => {
 
   return (
     <div>
-      <h2>Role List</h2>
+      <h2>Assign Role in Menu</h2>
 
       <Card>
         {!isDrawerOpen ? <>
           <SearchBox searchKey={setSearchKey} />
-          <div className="d-flex justify-content-end mt-4 mb-3">
-            <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
-              যুক্ত করুন
-            </Button>
-          </div>
+
         </>
 
           : null}

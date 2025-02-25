@@ -1,15 +1,13 @@
 
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Drawer from "../../components/Drawer";
 import DrawerBody from "../../components/Drawer/DrawerBody";
 import DrawerFooter from "../../components/Drawer/DrawerFooter";
 import Button from "../../components/UI/button/Button";
-import TextArea from "../../components/UI/input/textArea";
 import Input2 from "../../components/UI/input/Input2";
 import SearchableSelect from "../../components/UI/Select/new";
-import { ReportService } from "../../service/service";
 const initPayload = {
   meta: {
     page: 0,
@@ -23,7 +21,7 @@ interface IRoleForm {
   onClose: () => void;
   updateData?: any;
   submitLoading?: boolean;
-  data?:any;
+  data?: any;
 
 }
 
@@ -41,7 +39,7 @@ const RoleForm = ({
     handleSubmit,
     reset,
     getValues,
-    control,watch,
+    control, watch,
     setValue,
     formState: { errors },
   } = useForm();
@@ -59,9 +57,9 @@ const RoleForm = ({
     // eslint-disable-next-line
   }, [isOpen, updateData, reset]);
 
-  
+
   console.log(updateData);
-  
+
 
   return (
     <Drawer
@@ -106,7 +104,7 @@ const RoleForm = ({
               />
 
             </div>
-            
+
             <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
               <Input2
                 register={register("icon",)}
@@ -130,17 +128,17 @@ const RoleForm = ({
               render={({ field }) => (
                 <SearchableSelect
                   {...field} // Pass the field props to the SearchableSelect
-                  options={updateData?.sub?updateData?.DTO:data||[]}
+                  options={updateData?.sub ? updateData?.DTO : data || []}
                   // onChange={(e: any) => setValue('roleID', e?.map((e: any) => e?.value))}
-                  defaultValue={watch('permissionRole')} 
+                  defaultValue={watch('permissionRole')}
                   setValue={setValue}
-                  />
+                />
               )}
             />
-          
 
-          </div>        
-          </DrawerBody>
+
+          </div>
+        </DrawerBody>
 
         <DrawerFooter>
           <div className="d-flex gap-3 justify-content-end">
