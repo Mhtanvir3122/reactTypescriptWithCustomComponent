@@ -8,15 +8,7 @@ import DrawerFooter from "../../components/Drawer/DrawerFooter";
 import Button from "../../components/UI/button/Button";
 import TextArea from "../../components/UI/input/textArea";
 import Input2 from "../../components/UI/input/Input2";
-import SearchableSelect from "../../components/UI/Select/new";
-import { ReportService } from "../../service/service";
-const initPayload = {
-  meta: {
-    page: 0,
-    limit: 20,
-  },
-  body: { searchKey: "", isActive: true, isDeleted: false, organizationId: "" },
-};
+
 interface IRoleForm {
   isOpen: boolean;
   onSubmit: (data: any) => void;
@@ -53,24 +45,7 @@ const RoleForm = ({
 
     // eslint-disable-next-line
   }, [isOpen, updateData, reset]);
-  useEffect(() => {
-    getRoleList ();
-
-  }, []);
-
-  console.log(updateData);
   
-  const [roleData, setRoleData] = useState<any>();
-
-  const getRoleList = () => {
-    ReportService.roleSearch({ keyword: "" })
-      .then((resp) => {
-        setRoleData(resp?.data);
-      })
-      .catch((err) => {
-      })
-      ;
-  };
 
   return (
     <Drawer

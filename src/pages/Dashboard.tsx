@@ -3,15 +3,17 @@ import { useTranslation } from "react-i18next";
 import Summary from "../components/summary/Summary";
 import SaleChart from "../components/chart/Chart";
 import DashboardTables from "../components/tables/DashboardTables";
+import ApexChart from "./ApexChart";
 
 function Dashboard() {
   const { t } = useTranslation();
   return (
     <section>
       <h2 className="title">{t("dashboard")}</h2>
-      <Summary />
+      {/* <Summary />
       <SaleChart />
-      <DashboardTables />
+      <DashboardTables /> */}
+      <ApexChart />
     </section>
   );
 }

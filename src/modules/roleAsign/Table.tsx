@@ -22,7 +22,7 @@ const RoleAssignTable: React.FC<Props> = ({ visibleData, handleEditItem, handleD
         <tr>
           <th>No</th>
           
-          <th>Role Name</th>
+          <th>Employee Name</th>
           <th>Email</th>
           <th>ROLES</th>
 

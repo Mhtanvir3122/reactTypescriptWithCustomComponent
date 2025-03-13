@@ -32,7 +32,7 @@ const sidebarNav = [
     section: "ACL",
     link: "/",
     icon: "icon-park-outline:transaction-order",
-    permissionRole: ["USER_ROLE"],
+    permissionRole: ["ADMIN"],
     children: [
       {
         link: "/url",

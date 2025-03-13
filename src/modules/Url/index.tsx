@@ -61,34 +61,53 @@ const URL = () => {
         delete e.id
 
         updatedData?.menu?
-        ReportService?.routeConfigUpdate( { children:[e],...e},updatedData?.id):
+        ReportService?.routeConfigUpdate( { children:[e],...e},updatedData?.id).then((resp) => {
+          //  getEmployeeList();
+          onDrawerClose ()          
+         })
+         .catch((err) => {
+         })
+         .finally(() => {
+           setLoading(false);
+         }):
         updatedData?.edit?
-        ReportService?.routeConfigUpdate2(updatedData?.id,e):
+        ReportService?.routeConfigUpdate2(updatedData?.id,e).then((resp) => {
+          //  getEmployeeList();
+          onDrawerClose()           
+         })
+         .catch((err) => {
+         })
+         .finally(() => {
+           setLoading(false);
+         }):
         updatedData?.subMenu?
-        ReportService.routeConfigUpdatedd(e,updatedData?.id)
+        ReportService.routeConfigUpdatedd(e,updatedData?.id).then((resp) => {
+          //  getEmployeeList();
+          onDrawerClose()           
+         })
+         .catch((err) => {
+         })
+         .finally(() => {
+           setLoading(false);
+         })
         :
         ReportService.routeConfigSave({ ...e })
            .then((resp) => {
-             setData(resp?.data);
-             console.log(resp);
+            onDrawerClose()
              
            })
            .catch((err) => {
            })
            .finally(() => {
              setLoading(false);
-           });
+           })
 
-    onDrawerClose();
 
   }
   const onDrawerClose = () => {
-
     setIsDrawerOpen(false);
     setUpdatedData(null);
     getEmployeeList();
-
-
   };
   const handlePageChange = (visibleData: any[], page: number, limit: number) => {
     setData2(visibleData);
@@ -97,15 +116,9 @@ const URL = () => {
   const handleEditItem = (id: string) => {
     setIsDrawerOpen(true);
     setUpdatedData(id)
-    
-
-
-
   };
 
-  const handleDeleteItem = (e: any) => {
-    console.log(e);
-    
+  const handleDeleteItem = (e: any) => {    
     e?.submenu?
     ReportService.routeConfigDelete(e?.id):
     ReportService.routeConfigDeleteParent(e)
