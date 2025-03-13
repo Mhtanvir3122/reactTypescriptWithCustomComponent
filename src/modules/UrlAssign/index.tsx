@@ -135,10 +135,11 @@ const UrlAssign = () => {
 
   return (
     <div>
-      <h2>Assign Role in Menu</h2>
 
       <Card>
         {!isDrawerOpen ? <>
+          <h2>Assign Role in Menu</h2>
+<hr/>
           <SearchBox searchKey={setSearchKey} />
 
         </>

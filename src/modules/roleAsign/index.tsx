@@ -111,12 +111,13 @@ const RoleAssign = () => {
 
   return (
     <div>
-      <h2>Role Assign List</h2>
 
       <Card>
         {!isDrawerOpen ? <>
+          <h2>Role Assign List</h2>
+<hr />
           <SearchBox searchKey={setSearchKey} />
-          <div className="d-flex justify-content-end mt-4 mb-3">
+          <div className="d-flex justify-content-end mt-2 mb-3">
             {/* <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
               যুক্ত করুন
             </Button> */}

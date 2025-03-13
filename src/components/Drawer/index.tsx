@@ -32,11 +32,15 @@ export default ({
         <div className="">
           <div className="w-100 ">
             {title ? (
+              <>
               <DrawerHeader
                 title={title}
                 closeIconAction={handleClose}
                 backIconAction={handleClose}
               />
+              <hr/>
+              </>
+
             ) : null}
             <div className="card p-4">
             

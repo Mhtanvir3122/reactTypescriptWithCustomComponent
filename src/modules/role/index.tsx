@@ -23,22 +23,22 @@ const Role = () => {
   const [searchKey, setSearchKey] = useState<any>();
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-    
-  
+
+
   useEffect(() => {
     getEmployeeList();
 
   }, [searchKey]);
 
   const {
-      register,
-      handleSubmit,
-      reset,
-      getValues, watch,
-      control,
-      setValue,
-      formState: { errors },
-    } = useForm();
+    register,
+    handleSubmit,
+    reset,
+    getValues, watch,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
   const getEmployeeList = () => {
 
@@ -54,19 +54,19 @@ const Role = () => {
   };
 
   const onSubmit = (e: any) => {
-    updatedData?
-    ReportService.roleUpdate(  e ,updatedData?.id): ReportService.roleSave({ ...e })
-      .then((resp) => {
-        setData(resp?.data);
-        console.log(resp);
-        
-      })
-      .catch((err) => {
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-    
+    updatedData ?
+      ReportService.roleUpdate(e, updatedData?.id) : ReportService.roleSave({ ...e })
+        .then((resp) => {
+          setData(resp?.data);
+          console.log(resp);
+
+        })
+        .catch((err) => {
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+
 
     onDrawerClose();
 
@@ -104,15 +104,20 @@ const Role = () => {
 
   return (
     <div>
-      <h2>Role List</h2>
 
       <Card>
         {!isDrawerOpen ? <>
+          <h2>Role List</h2>
+          <hr />
+          <div className="d-flex gap-4">
+            <div className="w-100">
           <SearchBox searchKey={setSearchKey} />
-          <div className="d-flex justify-content-end mt-4 mb-3">
+          </div>
+          <div className="d-flex justify-content-end mt-1 mb-3 w-25">
             <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
               যুক্ত করুন
             </Button>
+          </div>
           </div>
         </>
 

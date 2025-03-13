@@ -51,7 +51,7 @@ useEffect(() => {
 
   return (
     <Drawer
-      title={`ধরণ-শাখা  করুন`}
+      title={`Role Create Form`}
       isOpen={isOpen}
       handleClose={onClose}
       className="w-md-25 w-xl-25"
@@ -62,12 +62,12 @@ useEffect(() => {
           <div className="row">
             <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
               <Input2
-                register={register("name",)}
-                label="name"
+                register={register("name")}
+                label="Role Name"
                 type="text"
                 // value={"name"}
                 onValueChange={(value) => setValue("name", value)}
-                placeholder="Enter User Name"
+                placeholder="Enter Role Name"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
                   minWidth: "100%"

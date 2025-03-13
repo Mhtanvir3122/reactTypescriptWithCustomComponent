@@ -23,22 +23,22 @@ const URL = () => {
   const [searchKey, setSearchKey] = useState<any>();
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-    
-  
+
+
   useEffect(() => {
     getEmployeeList();
 
   }, [searchKey]);
 
   const {
-      register,
-      handleSubmit,
-      reset,
-      getValues, watch,
-      control,
-      setValue,
-      formState: { errors },
-    } = useForm();
+    register,
+    handleSubmit,
+    reset,
+    getValues, watch,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
   const getEmployeeList = () => {
 
@@ -54,53 +54,53 @@ const URL = () => {
   };
 
 
-    
 
-      const onSubmit = (e: any) => {
-        delete e.permissionRole
-        delete e.id
 
-        updatedData?.menu?
-        ReportService?.routeConfigUpdate( { children:[e],...e},updatedData?.id).then((resp) => {
+  const onSubmit = (e: any) => {
+    delete e.permissionRole
+    delete e.id
+
+    updatedData?.menu ?
+      ReportService?.routeConfigUpdate({ children: [e], ...e }, updatedData?.id).then((resp) => {
+        //  getEmployeeList();
+        onDrawerClose()
+      })
+        .catch((err) => {
+        })
+        .finally(() => {
+          setLoading(false);
+        }) :
+      updatedData?.edit ?
+        ReportService?.routeConfigUpdate2(updatedData?.id, e).then((resp) => {
           //  getEmployeeList();
-          onDrawerClose ()          
-         })
-         .catch((err) => {
-         })
-         .finally(() => {
-           setLoading(false);
-         }):
-        updatedData?.edit?
-        ReportService?.routeConfigUpdate2(updatedData?.id,e).then((resp) => {
-          //  getEmployeeList();
-          onDrawerClose()           
-         })
-         .catch((err) => {
-         })
-         .finally(() => {
-           setLoading(false);
-         }):
-        updatedData?.subMenu?
-        ReportService.routeConfigUpdatedd(e,updatedData?.id).then((resp) => {
-          //  getEmployeeList();
-          onDrawerClose()           
-         })
-         .catch((err) => {
-         })
-         .finally(() => {
-           setLoading(false);
-         })
-        :
-        ReportService.routeConfigSave({ ...e })
-           .then((resp) => {
+          onDrawerClose()
+        })
+          .catch((err) => {
+          })
+          .finally(() => {
+            setLoading(false);
+          }) :
+        updatedData?.subMenu ?
+          ReportService.routeConfigUpdatedd(e, updatedData?.id).then((resp) => {
+            //  getEmployeeList();
             onDrawerClose()
-             
-           })
-           .catch((err) => {
-           })
-           .finally(() => {
-             setLoading(false);
-           })
+          })
+            .catch((err) => {
+            })
+            .finally(() => {
+              setLoading(false);
+            })
+          :
+          ReportService.routeConfigSave({ ...e })
+            .then((resp) => {
+              onDrawerClose()
+
+            })
+            .catch((err) => {
+            })
+            .finally(() => {
+              setLoading(false);
+            })
 
 
   }
@@ -118,13 +118,13 @@ const URL = () => {
     setUpdatedData(id)
   };
 
-  const handleDeleteItem = (e: any) => {    
-    e?.submenu?
-    ReportService.routeConfigDelete(e?.id):
-    ReportService.routeConfigDeleteParent(e)
-      .then((res) => {
-        getEmployeeList();
-      })
+  const handleDeleteItem = (e: any) => {
+    e?.submenu ?
+      ReportService.routeConfigDelete(e?.id) :
+      ReportService.routeConfigDeleteParent(e)
+        .then((res) => {
+          getEmployeeList();
+        })
   };
 
 
@@ -133,16 +133,22 @@ const URL = () => {
 
   return (
     <div>
-      <h2>Menu Create</h2>
 
       <Card>
         {!isDrawerOpen ? <>
-          <SearchBox searchKey={setSearchKey} />
-          <div className="d-flex justify-content-end mt-4 mb-3">
-            <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
-              যুক্ত করুন
-            </Button>
+          <h2>Menu Create List</h2>
+          <hr />
+          <div className="row ">
+            <div className="col-10 ">          
+              <SearchBox searchKey={setSearchKey} />
+            </div>
+            <div className="col-2  d-flex justify-content-center" >
+              <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
+                যুক্ত করুন
+              </Button>
+            </div>
           </div>
+
         </>
 
           : null}

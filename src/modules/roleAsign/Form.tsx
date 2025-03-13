@@ -61,7 +61,7 @@ const RoleAssignForm = ({
 
   return (
     <Drawer
-      title={`ধরণ-শাখা  করুন`}
+      title={`Role Assign Form`}
       isOpen={isOpen}
       handleClose={onClose}
       className="w-md-25 w-xl-25"
