@@ -56,13 +56,22 @@ const UrlAssign = () => {
   const onSubmit = (e: any) => {
     updatedData?.sub ?
 
-      ReportService.routeConfigAssignChild(updatedData?.id, e?.roles?.map((e: any) => e?.value)) :
+      ReportService.routeConfigAssignChild(updatedData?.id, e?.roles?.map((e: any) => e?.value)) .then((resp) => {
+        // setData(resp?.data);
+        console.log(resp);
+        onDrawerClose()
+      })
+      .catch((err) => {
+      })
+      .finally(() => {
+        setLoading(false);
+      }) :
       ReportService.routeConfigAssign(updatedData?.id, e?.roles?.map((e: any) => e?.value))
 
         .then((resp) => {
-          setData(resp?.data);
+          // setData(resp?.data);
           console.log(resp);
-
+          onDrawerClose()
         })
         .catch((err) => {
         })
@@ -71,7 +80,7 @@ const UrlAssign = () => {
         });
 
 
-    onDrawerClose();
+    // onDrawerClose();
 
   }
   const onDrawerClose = () => {
