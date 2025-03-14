@@ -14,6 +14,7 @@ import RoleAssign from "./modules/roleAsign";
 import LocalStorageCRUD from "./pages/cr";
 import URL from "./modules/Url";
 import UrlAssign from "./modules/UrlAssign";
+import ChatComponent from "./modules/chat/chat";
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
@@ -30,7 +31,7 @@ function App() {
             <Route path="/" element={<MainLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="/orders" element={<LocalStorageCRUD />} />
-              <Route path="/analytics" element={<BlankPage />} />
+              <Route path="/analytics" element={<ChatComponent />} />
               <Route path="/role-assign" element={<RoleAssign />} />
               <Route path="/role" element={<Role />} />
               <Route path="/url" element={<URL />} />
