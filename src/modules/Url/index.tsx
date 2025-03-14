@@ -42,7 +42,7 @@ const URL = () => {
 
   const getEmployeeList = () => {
 
-    ReportService.routeGet()
+    ReportService.routeGetPost({ keyword: searchKey })
       .then((resp) => {
         setData(resp);
       })

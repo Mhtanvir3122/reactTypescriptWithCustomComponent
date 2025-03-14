@@ -98,6 +98,9 @@ export const ReportService = {
     routeGet: async (): Promise<any> =>
         await axios.get( "http://localhost:8080/AuthService/auth/route-configs",),
 
+    routeGetPost: async (payload:any): Promise<any> =>
+        await axios.post( "http://localhost:8080/AuthService/auth/route-configs/route/search",payload),
+
     routeGetList: async (): Promise<any> =>
         await axios.get( "http://localhost:8080/AuthService/auth/route-configs/list",),
 

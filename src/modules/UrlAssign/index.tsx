@@ -42,7 +42,7 @@ const UrlAssign = () => {
 
   const getEmployeeList = () => {
 
-    ReportService.routeGet()
+    ReportService.routeGetPost({ keyword: searchKey })
       .then((resp) => {
         setData(resp);
       })
@@ -121,7 +121,7 @@ const UrlAssign = () => {
 
 
   const getRoleList = () => {
-    ReportService.roleSearch({ keyword: "" })
+    ReportService.roleSearch({ keyword: searchKey })
       .then((resp) => {
         setRoleData(resp?.data);
       })
