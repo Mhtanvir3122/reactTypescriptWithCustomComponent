@@ -15,6 +15,8 @@ import LocalStorageCRUD from "./pages/cr";
 import URL from "./modules/Url";
 import UrlAssign from "./modules/UrlAssign";
 import ChatComponent from "./modules/chat/chat";
+import TaskCreate from "./modules/TaskCreate";
+import TaskAssign from "./modules/TaskAssign";
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
@@ -38,8 +40,13 @@ function App() {
               <Route path="/url-assign" element={<UrlAssign />} />
               <Route path="/url-blank" element={<BlankPage />} />
 
-              
 
+
+              <Route path="/task-create" element={<TaskCreate />} />
+              <Route path="/task-assign" element={<TaskAssign />} />
+              <Route path="/ageent-task" element={<BlankPage />} />
+
+              
 
             </Route>
           </Route>

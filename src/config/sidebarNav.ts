@@ -33,6 +33,24 @@ const sidebarNav = [
     icon: "ic:round-inventory",
     permissionRole: ["USER_ROLE", "ADMIN"],
   },
+  {
+    link: "/task-create",
+    section: "Create Task",
+    icon: "ic:round-inventory",
+    permissionRole: ["USER_ROLE", "ADMIN"],
+  },
+  {
+    link: "/task-assign",
+    section: "Assign Task",
+    icon: "ic:round-inventory",
+    permissionRole: ["USER_ROLE", "ADMIN"],
+  },
+  {
+    link: "/ageent-task",
+    section: "Agent Task List",
+    icon: "ic:round-inventory",
+    permissionRole: ["USER_ROLE", "ADMIN"],
+  },
   
   {
     section: "ACL",
