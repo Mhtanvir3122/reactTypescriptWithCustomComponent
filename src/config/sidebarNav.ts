@@ -22,12 +22,18 @@ const sidebarNav = [
   },
 
   {
+    link: "/url-blank",
+    section: "Blank",
+    icon: "ic:round-inventory",
+    permissionRole: ["USER_ROLE", "ADMIN"],
+  },
+  {
     link: "/",
     section: "inventory",
     icon: "ic:round-inventory",
     permissionRole: ["USER_ROLE", "ADMIN"],
   },
-
+  
   {
     section: "ACL",
     link: "/",

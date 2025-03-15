@@ -11,6 +11,7 @@ import Input2 from "../../components/UI/input/Input2";
 import Input from "../../components/UI/input/Input";
 import SearchableSelect from "../../components/UI/Select/new";
 import Select from "react-select/dist/declarations/src/Select";
+import DynamicField from "../../components/UI/Select/new";
 const initPayload = {
   meta: {
     page: 0,
@@ -86,23 +87,36 @@ const RoleAssignForm = ({
 
               />
             </div>
-            {/* <SearchableSelect options={roleData || []} onChange={(e: any) => setValue('roleID', e?.map((e: any) => e?.value))
+
+            <div className="col-xl-12 col-md-12 col-sm-12 col-lg-12">
 
 
-            } /> */}
-            <Controller
-              control={control}
-              name="roles"
-              render={({ field }) => (
-                <SearchableSelect
-                  {...field} // Pass the field props to the SearchableSelect
-                  options={roleData}
-                  // onChange={(e: any) => setValue('roleID', e?.map((e: any) => e?.value))}
-                  defaultValue={watch('roles')} 
-                  setValue={setValue}
-                  />
-              )}
-            />
+
+              <SearchableSelect
+                setValue={setValue}
+                options={roleData}
+                onChange={(e) => { console.log(e); }}
+                fieldName="roles"
+                defaultValue={updateData?.roles} // Preloading previous selection
+                isMulti
+                isReq={true}
+                register={register}
+                errors={errors}
+                label="Roles"
+              />
+
+              {/* <SearchableSelect
+                setValue={setValue}
+                options={roleData}
+                fieldName="roles"
+                defaultValue={updateData?.roles} // Preloading previous selection
+                isMulti
+                isReq={true}
+                register={register}
+                errors={errors}
+                label="Roles"
+              /> */}
+            </div>
 
 
           </div>

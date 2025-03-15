@@ -6,11 +6,13 @@ import ThemeContext from "../../../store/themeContext";
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   value?: string;
-  onValueChange: (value: string) => void;
+  onValueChange?: (value: string) => void; // Made optional
   label?: string;
   containerStyle?: React.CSSProperties;
   inputStyle?: React.CSSProperties;
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn; // Made optional
+  error?: any;
+  isRequired?: boolean; // New prop to control required validation
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -21,33 +23,43 @@ const TextArea: React.FC<TextAreaProps> = ({
   containerStyle,
   inputStyle,
   register,
+  error,
+  isRequired = false, // Default is optional
   ...rest
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    onValueChange(e.target.value);
+    if (onValueChange) {
+      onValueChange(e.target.value);
+    }
   };
   const { t } = useTranslation();
   const themeCtx = useContext(ThemeContext);
-
-  const isdark= themeCtx?.theme==="dark"
-
+  const isDark = themeCtx?.theme === "dark";
 
   return (
-    <div>
-    <h3 style={{marginBottom:12,color:"#36BA98"}}>{t(`${label}`)}</h3>
-
-    <div className={`${classes.form__control} ${classes}`}>
-
-      <textarea
-        {...register}
-        value={value}
-        onChange={handleChange}
-        placeholder={placeholder}
-        style={{ padding: "8px", width: "100%", marginBottom: "10px", ...inputStyle  ,         color:isdark?"white":"black"
-        }}
-        {...rest}
-      />
+    <div style={containerStyle}>
+      {label && (
+        <h3 style={{ marginBottom: 12, color: "#36BA98" }}>
+          {t(label)} {isRequired ? <span className="text-danger">*</span> : null}
+        </h3>
+      )}
+      <div className={`${classes.form__control}`}>
+        <textarea
+          {...(register || {})} // Only spread register if provided
+          value={value}
+          onChange={handleChange}
+          placeholder={placeholder}
+          style={{
+            padding: "8px",
+            width: "100%",
+            marginBottom: "10px",
+            color: isDark ? "white" : "black",
+            ...inputStyle,
+          }}
+          {...rest}
+        />
       </div>
+      {error && <p style={{ color: "red", marginTop: 4 }}>{error}</p>}
     </div>
   );
 };

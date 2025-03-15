@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./Input.module.scss";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import ThemeContext from "../../../store/themeContext";
 
-interface Input2Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface DatePickerProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value?: string;
   onValueChange?: (value: string) => void; // Made optional
   label?: string;
@@ -11,19 +12,18 @@ interface Input2Props extends React.InputHTMLAttributes<HTMLInputElement> {
   inputStyle?: React.CSSProperties;
   register?: UseFormRegisterReturn; // Made optional
   error?: any;
-  isRequired?: boolean; // New prop to control required validation
+  isRequired?: boolean; // Controls mandatory validation
 }
 
-const Input2: React.FC<Input2Props> = ({
+const DatePicker: React.FC<DatePickerProps> = ({
   value,
   onValueChange,
   label,
-  placeholder,
   containerStyle,
   inputStyle,
   register,
   error,
-  isRequired = false, // Default is optional
+  isRequired = false,
   ...rest
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +31,10 @@ const Input2: React.FC<Input2Props> = ({
       onValueChange(e.target.value);
     }
   };
+
   const { t } = useTranslation();
+  const themeCtx = useContext(ThemeContext);
+  const isDark = themeCtx?.theme === "dark";
 
   return (
     <div style={containerStyle}>
@@ -42,12 +45,20 @@ const Input2: React.FC<Input2Props> = ({
       )}
       <div className={`${classes.form__control}`}>
         <input
+          type="date"
           {...(register || {})} // Only spread register if provided
-          type="text"
           value={value}
           onChange={handleChange}
-          placeholder={placeholder}
-          style={{ padding: "8px", width: "80%", marginBottom: "10px", ...inputStyle }}
+          style={{
+            padding: "8px",
+            width: "100%",
+            marginBottom: "10px",
+            color: isDark ? "white" : "black",
+            backgroundColor: isDark ? "#333" : "#fff",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            ...inputStyle,
+          }}
           {...rest}
         />
       </div>
@@ -56,4 +67,4 @@ const Input2: React.FC<Input2Props> = ({
   );
 };
 
-export default Input2;
+export default DatePicker;

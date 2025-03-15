@@ -54,6 +54,8 @@ const UrlAssign = () => {
   };
 
   const onSubmit = (e: any) => {
+
+    
     updatedData?.sub ?
 
       ReportService.routeConfigAssignChild(updatedData?.id, e?.roles?.map((e: any) => e?.value)) .then((resp) => {

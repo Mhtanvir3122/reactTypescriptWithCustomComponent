@@ -36,7 +36,9 @@ function App() {
               <Route path="/role" element={<Role />} />
               <Route path="/url" element={<URL />} />
               <Route path="/url-assign" element={<UrlAssign />} />
+              <Route path="/url-blank" element={<BlankPage />} />
 
+              
 
 
             </Route>

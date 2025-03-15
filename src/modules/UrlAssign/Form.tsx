@@ -58,7 +58,6 @@ const RoleForm = ({
   }, [isOpen, updateData, reset]);
 
 
-  console.log(updateData);
 
 
   return (
@@ -122,7 +121,7 @@ const RoleForm = ({
 
             </div>
 
-            <Controller
+            {/* <Controller
               control={control}
               name="permissionRole"
               render={({ field }) => (
@@ -134,6 +133,29 @@ const RoleForm = ({
                   setValue={setValue}
                 />
               )}
+            /> */}
+
+            {/* <SearchableSelect
+                  setValue={setValue}
+                  options={updateData?.sub ? updateData?.DTO : data || []}
+                  onChange={() => { }}
+                  fieldName="permissionRole"
+                  isMulti={true}
+                  defaultValue={updateData?.roles}
+                /> */}
+
+
+            <SearchableSelect
+              setValue={setValue}
+              options={updateData?.sub ? updateData?.DTO : data || []}
+              fieldName="roles"
+              defaultValue={updateData?.permissionRole
+              } // Preloading previous selection
+              isMulti
+              isReq={true}
+              register={register}
+              errors={errors}
+              label="Roles"
             />
 
 

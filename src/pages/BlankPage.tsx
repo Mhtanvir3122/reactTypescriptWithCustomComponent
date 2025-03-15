@@ -5,7 +5,7 @@ import TextArea from "../components/UI/input/textArea";
 import { useForm } from "react-hook-form";
 import Card from "../components/UI/card/Card";
 import Input2 from "../components/UI/input/Input2";
-import { createEmployee,  deleteEmployee,  ReportService, updateEmployee } from "../service/service";
+import { createEmployee, deleteEmployee, ReportService, updateEmployee } from "../service/service";
 import SearchBox from "../components/topnav/searchBox/SearchBox";
 import TypeBranchForm from "./form/Form";
 import BlankTable from "./table/blankTable";
@@ -59,8 +59,12 @@ const BlankPage = () => {
       });
   };
   const onSubmit = (e: any) => {
-    
-    updatedData?.id? updateEmployee(updatedData?.id,e): createEmployee(e);
+
+    delete e.updateData 
+    console.log(e);
+
+
+    updatedData?.id ? updateEmployee(updatedData?.id, e) : createEmployee(e);
     onDrawerClose();
 
   }
@@ -79,21 +83,21 @@ const BlankPage = () => {
   const handleEditItem = (id: string) => {
     setIsDrawerOpen(true);
     setUpdatedData(id)
-    
 
- 
+
+
   };
 
-     const handleDeleteItem = (e: number) => {
-      ReportService.deleteEmployee(e)
-        .then((res) => {
-          getEmployeeList();
-        })
-    };
+  const handleDeleteItem = (e: number) => {
+    ReportService.deleteEmployee(e)
+      .then((res) => {
+        getEmployeeList();
+      })
+  };
 
   // const handleDeleteItem = (e: number) => {
   //   deleteEmployee(e);
-    
+
   //   onDrawerClose();
 
   // };
@@ -102,16 +106,17 @@ const BlankPage = () => {
 
   return (
     <div>
-      <h2>Employee List</h2>
 
       <Card>
         {!isDrawerOpen ? <>
-          <SearchBox searchKey={setSearchKey} />
-          <div className="d-flex justify-content-end mt-4 mb-3">
+          <h2 className="d-flex justify-content-between ">Employee List  <div className="d-flex justify-content-end ">
             <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
               যুক্ত করুন
             </Button>
-          </div>
+          </div></h2>
+          <hr />
+          <SearchBox searchKey={setSearchKey} />
+         <div className="mb-4"></div>
         </>
 
           : null}
@@ -127,20 +132,20 @@ const BlankPage = () => {
 
 
 
-<div >
-<BlankTable
-  handleDeleteItem={handleDeleteItem}
-  handleEditItem={handleEditItem}
-  visibleData={data2} />
+          <div >
+            <BlankTable
+              handleDeleteItem={handleDeleteItem}
+              handleEditItem={handleEditItem}
+              visibleData={data2} />
 
-<br></br>
-<Pagination
-  data={data?.data}
-  defaultLimit={10}
-  onPageChange={handlePageChange}
-/>
+            <br></br>
+            <Pagination
+              data={data?.data}
+              defaultLimit={10}
+              onPageChange={handlePageChange}
+            />
 
-</div>
+          </div>
 
           // <ul>
           //   {data?.data?.map((emp: any) => (

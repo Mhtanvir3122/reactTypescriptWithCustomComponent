@@ -21,9 +21,9 @@ const BlankTable: React.FC<Props> = ({ visibleData, handleEditItem, handleDelete
       <thead>
         <tr>
           <th>No</th>
-          <th>Title</th>
           <th>User Name</th>
-          <th>Description</th>
+          <th>Email</th>
+          <th>Department</th>
           <th style={{ width: 200 }}>Action</th>
         </tr>
       </thead>
