@@ -58,7 +58,6 @@ const TaskCreate = () => {
 
   const onSubmit = (e: any) => {
     e.status = "TODO"
-    console.log(e);
     
 
     updatedData?.edit ?

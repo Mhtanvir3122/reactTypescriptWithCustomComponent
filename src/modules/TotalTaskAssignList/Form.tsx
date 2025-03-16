@@ -1,17 +1,12 @@
 
 
-import { useEffect, useRef, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import Drawer from "../../components/Drawer";
 import DrawerBody from "../../components/Drawer/DrawerBody";
 import DrawerFooter from "../../components/Drawer/DrawerFooter";
 import Button from "../../components/UI/button/Button";
-import TextArea from "../../components/UI/input/textArea";
-import Input2 from "../../components/UI/input/Input2";
-import Input from "../../components/UI/input/Input";
 import SearchableSelect from "../../components/UI/Select/new";
-import Select from "react-select/dist/declarations/src/Select";
-import DynamicField from "../../components/UI/Select/new";
 const initPayload = {
   meta: {
     page: 0,
@@ -84,7 +79,7 @@ const RoleAssignForm = ({
               <strong>Description:</strong> {updateData?.description}
             </div>
 
-            
+
 
 
             <hr />
@@ -93,21 +88,23 @@ const RoleAssignForm = ({
             <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
               <SearchableSelect
                 setValue={setValue}
-                options={roleData?.map((user: any) => ({
-                  id: user.id,
-                  name: user.username
-                })) || []}
+                options={[
+                  { id: "1", name: 'TODO' }, 
+                  { id: "2", name: 'IN_PROGRESS' },
+                  { id: "3", name: 'EXPIRED' }, 
+                  { id: "4", name: 'COMPLETED' },
+               ]}
 
-                onChange={() => { }}
-                fieldName="agent"
+                onChange={(e) => {setValue('status',e?.label) }}
+                fieldName="status"
                 isMulti={false}
-                label='Agent '
+                label='Status '
                 isReq={true}
                 errors={errors}
-                defaultValue={{
-                  id: updateData?.assignedUser?.id,
-                  name: updateData?.assignedUser?.username
-                }}
+                defaultValue={updateData?.status==='TODO'? { id: "1", name: 'TODO' }:
+                updateData?.status==='IN_PROGRESS'? { id: "2", name: 'IN_PROGRESS' }:
+                updateData?.status==='EXPIRED'?     { id: "3", name: 'EXPIRED' }:
+                updateData?.status==='COMPLETED'?    { id: "4", name: 'COMPLETED' }:[]}
 
               />
 

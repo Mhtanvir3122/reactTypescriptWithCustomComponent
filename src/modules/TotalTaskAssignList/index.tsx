@@ -73,7 +73,7 @@ const TaskAssignAgentList = () => {
 
   const onSubmit = (e: any) => {
     
-    ReportService.taskAssign(  updatedData?.id,e?.agent?.value  )
+    ReportService?.taskUpdate(updatedData?.id, e)
       .then((resp) => {
         getEmployeeList();
         
