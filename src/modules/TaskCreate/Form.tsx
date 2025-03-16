@@ -9,6 +9,7 @@ import Button from "../../components/UI/button/Button";
 import TextArea from "../../components/UI/input/textArea";
 import Input2 from "../../components/UI/input/Input2";
 import SearchableSelect from "../../components/UI/Select/new";
+import DatePicker from "../../components/UI/input/DateInput";
 
 interface IRoleForm {
   isOpen: boolean;
@@ -40,7 +41,8 @@ const RoleForm = ({
     if (isOpen && updateData && !updateData?.menu) {
 
       reset({
-        ...updateData
+        ...updateData,
+        dueDate: updateData?.dueDate?new Date(updateData?.dueDate).toISOString().split('T')[0]:null
       });
     } else reset({});
 
@@ -80,15 +82,42 @@ const RoleForm = ({
               <SearchableSelect
                 setValue={setValue}
                 options={[{ id: "1", name: 'HIGH' }, { id: "2", name: 'LOW' }]}
-                onChange={(e) => {setValue('priority',e?.label) }}
+                onChange={(e) => { setValue('priority', e?.label) }}
                 fieldName="priority"
                 isMulti={false}
                 label='Priority'
                 isReq={true}
                 errors={errors}
-                defaultValue={updateData?.priority === "HIGH" ? { id: "1", name: 'HIGH' } : updateData?.priority === "LOW" ? { id: "2", name: 'LOW' }:null}
+                defaultValue={updateData?.priority === "HIGH" ? { id: "1", name: 'HIGH' } : updateData?.priority === "LOW" ? { id: "2", name: 'LOW' } : null}
               />
 
+            </div>
+            <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
+
+
+            <div className="d-flex gap-2 align-items-center">
+              <div className="w-100">
+                <DatePicker
+                  label="Task End date"
+                  register={register("dueDate", { required: "Date is required" })}
+                  error={errors.dueDate?.message}
+                  isRequired={true}
+                />
+
+
+              </div>
+
+              <div>
+              </div>
+
+              <div
+                className="d-flex justify-content-center align-items-center"
+                onClick={() => setValue('dateField', null)}
+                style={{ cursor: 'pointer' }}
+              >
+                X
+              </div>
+            </div>
             </div>
 
 

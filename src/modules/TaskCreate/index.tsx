@@ -55,9 +55,12 @@ const TaskCreate = () => {
 
 
 
-
+  let username = localStorage?.getItem("userInfo") || "";
+  let userInfo = JSON.parse(username || "[]"); // Ensure it defaults to an empty array
   const onSubmit = (e: any) => {
     e.status = "TODO"
+    e.createdBy=userInfo?.id
+    e.dueDate= new Date( e.dueDate)
     
 
     updatedData?.edit ?

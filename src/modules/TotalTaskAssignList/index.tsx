@@ -6,6 +6,9 @@ import SearchBox from "../../components/topnav/searchBox/SearchBox";
 import { ReportService } from "../../service/service";
 import RoleForm from "./Form";
 import RoleTable from "./Table";
+import SearchableSelect from "../../components/UI/Select/new";
+import { useForm } from "react-hook-form";
+import DatePicker from "../../components/UI/input/DateInput";
 
 
 interface Employee {
@@ -17,34 +20,70 @@ interface Employee {
 const TaskAssignAgentList = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<any>();
+  const [employees, setEmployees] = useState<any>();
+
   const [roleData, setRoleData] = useState<any>();
 
   const [data2, setData2] = useState<any>();
   const [updatedData, setUpdatedData] = useState<any>();
   const [searchKey, setSearchKey] = useState<any>();
+  const [statusKey, setStatusKey] = useState<any>();
+  const [priyorityKey, setPiyorityKey] = useState<any>();
+  const [createdByKey, setCreatedByKey] = useState<any>();
+
+
+
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    getValues, watch,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
 
-
-  let username = localStorage?.getItem("userInfo")||"";
+  let username = localStorage?.getItem("userInfo") || "";
   let userInfo = JSON.parse(username || "[]"); // Ensure it defaults to an empty array
 
 
-  console.log(userInfo?.id);
-  
+  useEffect(() => {
+    getEmpList();
 
+  }, []);
+
+
+  const getEmpList = () => {
+    ReportService.registrationEmpList({ keyword: '' })
+      .then((resp) => {
+        setEmployees(resp?.data);
+      })
+      .catch((err) => {
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
-    getEmployeeList();
+    getDataList();
 
-  }, [searchKey]);
+  }, [searchKey, statusKey, priyorityKey, createdByKey]);
 
-  const getEmployeeList = () => {
-    ReportService.tsskList({ keyword: searchKey })
+  const getDataList = () => {
+    ReportService.tsskFilterList({
+      assignedUserId: userInfo?.id,
+      status: statusKey,
+      priority: priyorityKey,
+      createdBy: createdByKey,
+
+    })
       .then((resp) => {
         console.log(resp);
-        
+
         setData(resp);
       })
       .catch((err) => {
@@ -55,7 +94,7 @@ const TaskAssignAgentList = () => {
   };
 
   useEffect(() => {
-    getRoleList ();
+    getRoleList();
 
   }, []);
 
@@ -72,18 +111,18 @@ const TaskAssignAgentList = () => {
   };
 
   const onSubmit = (e: any) => {
-    
+
     ReportService?.taskUpdate(updatedData?.id, e)
       .then((resp) => {
-        getEmployeeList();
-        
+        getDataList();
+
       })
       .catch((err) => {
       })
       .finally(() => {
         setLoading(false);
       });
-    
+
 
     onDrawerClose();
 
@@ -92,7 +131,7 @@ const TaskAssignAgentList = () => {
 
     setIsDrawerOpen(false);
     setUpdatedData(null);
-    getEmployeeList();
+    getDataList();
 
 
   };
@@ -111,7 +150,7 @@ const TaskAssignAgentList = () => {
   const handleDeleteItem = (e: number) => {
     ReportService.taskDelete(e)
       .then((res) => {
-        getEmployeeList();
+        getDataList();
       })
   };
 
@@ -125,12 +164,70 @@ const TaskAssignAgentList = () => {
       <Card>
         {!isDrawerOpen ? <>
           <h2>Agent Task List</h2>
-<hr />
-          <SearchBox searchKey={setSearchKey} />
-          <div className="d-flex justify-content-end mt-2 mb-3">
-            {/* <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
-              যুক্ত করুন
-            </Button> */}
+          <hr />
+          {/* <SearchBox searchKey={setSearchKey} /> */}
+
+          <div className="row mt-4">
+
+            <div className="col-4">
+
+
+              <SearchableSelect
+                setValue={setValue}
+                options={employees?.map((item: any) => ({
+                  id: item.id,
+                  name: item.username
+                })) || []}
+
+                onChange={(e) => { setCreatedByKey(e?.value) }}
+                fieldName="emp"
+                isMulti={false}
+                label='Created By '
+                isReq={false}
+
+
+              />
+            </div>
+            <div className="col-4">
+              <SearchableSelect
+                setValue={setValue}
+                options={[
+                  { id: "1", name: 'TODO' },
+                  { id: "2", name: 'IN_PROGRESS' },
+                  { id: "3", name: 'EXPIRED' },
+                  { id: "4", name: 'COMPLETED' },
+                ]}
+
+                onChange={(e) => { setStatusKey(e?.label) }}
+                fieldName="status"
+                isMulti={false}
+                label='Status '
+                isReq={false}
+
+
+              />
+            </div>
+
+            <div className="col-4">
+
+              <SearchableSelect
+                setValue={setValue}
+                options={[
+                  { id: "1", name: 'HIGH' },
+                  { id: "2", name: 'LOW' },
+
+                ]}
+
+                onChange={(e) => { setPiyorityKey(e?.label) }}
+                fieldName="proyority"
+                isMulti={false}
+                label='Priyority '
+                isReq={false}
+
+
+              />
+            </div>
+
           </div>
         </>
 
@@ -152,7 +249,7 @@ const TaskAssignAgentList = () => {
             <RoleTable
               handleDeleteItem={handleDeleteItem}
               handleEditItem={handleEditItem}
-              visibleData={data2?.filter((e:any)=>e?.assignedUser?.id===userInfo?.id)} />
+              visibleData={data2} />
 
             <br></br>
             <Pagination

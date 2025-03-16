@@ -87,6 +87,11 @@ tsskCreate: async (payload:any): Promise<any> =>
 tsskList: async (payload:any): Promise<any> =>
     await axios.post( "http://localhost:8080/service2/tasks/search",payload),
 
+
+
+tsskFilterList: async (payload:any): Promise<any> =>
+    await axios.post( "http://localhost:8080/service2/tasks/filter",payload),
+
 taskUpdate: async (id: number,payload:any): Promise<any> =>
     await axios.put( "http://localhost:8080/service2/tasks/task-update"+`/${id}`, payload),
 
