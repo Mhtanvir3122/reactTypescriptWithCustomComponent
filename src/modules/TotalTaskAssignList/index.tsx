@@ -6,7 +6,6 @@ import SearchBox from "../../components/topnav/searchBox/SearchBox";
 import { ReportService } from "../../service/service";
 import RoleForm from "./Form";
 import RoleTable from "./Table";
-import { useForm } from "react-hook-form";
 
 
 interface Employee {
@@ -15,9 +14,11 @@ interface Employee {
   email: string;
 }
 
-const TaskCreate = () => {
+const TaskAssignAgentList = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<any>();
+  const [roleData, setRoleData] = useState<any>();
+
   const [data2, setData2] = useState<any>();
   const [updatedData, setUpdatedData] = useState<any>();
   const [searchKey, setSearchKey] = useState<any>();
@@ -25,25 +26,25 @@ const TaskCreate = () => {
   const [error, setError] = useState<string | null>(null);
 
 
+
+  let username = localStorage?.getItem("userInfo")||"";
+  let userInfo = JSON.parse(username || "[]"); // Ensure it defaults to an empty array
+
+
+  console.log(userInfo?.id);
+  
+
+
   useEffect(() => {
     getEmployeeList();
 
   }, [searchKey]);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    getValues, watch,
-    control,
-    setValue,
-    formState: { errors },
-  } = useForm();
-
   const getEmployeeList = () => {
-
     ReportService.tsskList({ keyword: searchKey })
       .then((resp) => {
+        console.log(resp);
+        
         setData(resp);
       })
       .catch((err) => {
@@ -53,42 +54,47 @@ const TaskCreate = () => {
       });
   };
 
+  useEffect(() => {
+    getRoleList ();
 
+  }, []);
 
+  const getRoleList = () => {
+    ReportService.getAgentsByFign()
+      .then((resp) => {
+        setRoleData(resp?.data);
+      })
+      .catch((err) => {
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const onSubmit = (e: any) => {
-    e.status = "TODO"
-    console.log(e);
+    
+    ReportService.taskAssign(  updatedData?.id,e?.agent?.value  )
+      .then((resp) => {
+        getEmployeeList();
+        
+      })
+      .catch((err) => {
+      })
+      .finally(() => {
+        setLoading(false);
+      });
     
 
-    updatedData?.edit ?
-      ReportService?.taskUpdate(updatedData?.id, e).then((resp) => {
-        //  getEmployeeList();
-        onDrawerClose()
-      })
-        .catch((err) => {
-        })
-        .finally(() => {
-          setLoading(false);
-        })
-      :
-      ReportService.tsskCreate({ ...e })
-        .then((resp) => {
-          onDrawerClose()
-
-        })
-        .catch((err) => {
-        })
-        .finally(() => {
-          setLoading(false);
-        })
-
+    onDrawerClose();
 
   }
   const onDrawerClose = () => {
+
     setIsDrawerOpen(false);
     setUpdatedData(null);
     getEmployeeList();
+
+
   };
   const handlePageChange = (visibleData: any[], page: number, limit: number) => {
     setData2(visibleData);
@@ -97,13 +103,16 @@ const TaskCreate = () => {
   const handleEditItem = (id: string) => {
     setIsDrawerOpen(true);
     setUpdatedData(id)
+
+
+
   };
 
-  const handleDeleteItem = (e: any) => {
-      ReportService.taskDelete(e) 
-        .then((res) => {
-          getEmployeeList();
-        })
+  const handleDeleteItem = (e: number) => {
+    ReportService.taskDelete(e)
+      .then((res) => {
+        getEmployeeList();
+      })
   };
 
 
@@ -115,19 +124,14 @@ const TaskCreate = () => {
 
       <Card>
         {!isDrawerOpen ? <>
-          <h2>  Task List</h2>
-          <hr />
-          <div className="row ">
-            <div className="col-10 ">
-              <SearchBox searchKey={setSearchKey} />
-            </div>
-            <div className="col-2  d-flex justify-content-center" >
-              <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
-                যুক্ত করুন
-              </Button>
-            </div>
+          <h2>Agent Task List</h2>
+<hr />
+          <SearchBox searchKey={setSearchKey} />
+          <div className="d-flex justify-content-end mt-2 mb-3">
+            {/* <Button color="primary" onClick={() => setIsDrawerOpen(true)}>
+              যুক্ত করুন
+            </Button> */}
           </div>
-
         </>
 
           : null}
@@ -138,6 +142,7 @@ const TaskCreate = () => {
           updateData={updatedData}
           onSubmit={onSubmit}
           submitLoading={true}
+          roleData={roleData}
         />
         {!isDrawerOpen ?
 
@@ -147,7 +152,7 @@ const TaskCreate = () => {
             <RoleTable
               handleDeleteItem={handleDeleteItem}
               handleEditItem={handleEditItem}
-              visibleData={data2} />
+              visibleData={data2?.filter((e:any)=>e?.assignedUser?.id===userInfo?.id)} />
 
             <br></br>
             <Pagination
@@ -169,4 +174,4 @@ const TaskCreate = () => {
 
 
 
-export default TaskCreate;
+export default TaskAssignAgentList;

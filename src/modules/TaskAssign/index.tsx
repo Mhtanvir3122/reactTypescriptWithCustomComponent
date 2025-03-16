@@ -32,7 +32,7 @@ const TaskAssign = () => {
   }, [searchKey]);
 
   const getEmployeeList = () => {
-    ReportService.registrationEmpList({ keyword: searchKey })
+    ReportService.tsskList({ keyword: searchKey })
       .then((resp) => {
         setData(resp);
       })
@@ -49,7 +49,7 @@ const TaskAssign = () => {
   }, []);
 
   const getRoleList = () => {
-    ReportService.roleSearch({ keyword: "" })
+    ReportService.getAgentsByFign()
       .then((resp) => {
         setRoleData(resp?.data);
       })
@@ -61,9 +61,8 @@ const TaskAssign = () => {
   };
 
   const onSubmit = (e: any) => {
-    console.log(e);
     
-    ReportService.assignRole(  updatedData?.id,e?.roles?.map((e: any) => e?.value) )
+    ReportService.taskAssign(  updatedData?.id,e?.agent?.value  )
       .then((resp) => {
         getEmployeeList();
         
@@ -99,7 +98,7 @@ const TaskAssign = () => {
   };
 
   const handleDeleteItem = (e: number) => {
-    ReportService.deleteRole(e)
+    ReportService.taskDelete(e)
       .then((res) => {
         getEmployeeList();
       })

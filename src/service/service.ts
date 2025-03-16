@@ -87,8 +87,26 @@ tsskCreate: async (payload:any): Promise<any> =>
 tsskList: async (payload:any): Promise<any> =>
     await axios.post( "http://localhost:8080/service2/tasks/search",payload),
 
-rtaskUpdate: async (id: number,payload:any): Promise<any> =>
+taskUpdate: async (id: number,payload:any): Promise<any> =>
     await axios.put( "http://localhost:8080/service2/tasks/task-update"+`/${id}`, payload),
+
+
+
+taskDelete: async (id: number): Promise<any> =>
+    await axios.delete( "http://localhost:8080/service2/tasks/task-delete/"+`${id}`),
+
+getAgentsByFign: async (): Promise<any> =>
+    await axios.get( "http://localhost:8080/service2/tasks/agents"),
+
+
+taskAssign: async (taskId: number, agentId: number): Promise<any> =>
+    await axios.post("http://localhost:8080/service2/tasks/assign", null, {
+        params: {
+            taskId: taskId,
+            agentId: agentId
+        }
+    }),
+
 
     routeConfigUpdate: async (payload:any,id: number): Promise<any> =>
         await axios.post( "http://localhost:8080/AuthService/auth/route-configs/"+`${id}/add-child`, payload),

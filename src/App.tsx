@@ -17,6 +17,7 @@ import UrlAssign from "./modules/UrlAssign";
 import ChatComponent from "./modules/chat/chat";
 import TaskCreate from "./modules/TaskCreate";
 import TaskAssign from "./modules/TaskAssign";
+import TaskAssignAgentList from "./modules/TotalTaskAssignList";
 
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
@@ -44,7 +45,7 @@ function App() {
 
               <Route path="/task-create" element={<TaskCreate />} />
               <Route path="/task-assign" element={<TaskAssign />} />
-              <Route path="/ageent-task" element={<BlankPage />} />
+              <Route path="/ageent-task" element={<TaskAssignAgentList />} />
 
               
 
