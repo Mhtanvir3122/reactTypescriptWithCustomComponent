@@ -81,6 +81,15 @@ export const ReportService = {
     routeConfigSave: async (payload:any): Promise<any> =>
         await axios.post( "http://localhost:8080/AuthService/auth/route-configs", payload),
 
+tsskCreate: async (payload:any): Promise<any> =>
+        await axios.post( "http://localhost:8080/service2/tasks/create", payload),
+
+tsskList: async (payload:any): Promise<any> =>
+    await axios.post( "http://localhost:8080/service2/tasks/search",payload),
+
+rtaskUpdate: async (id: number,payload:any): Promise<any> =>
+    await axios.put( "http://localhost:8080/service2/tasks/task-update"+`/${id}`, payload),
+
     routeConfigUpdate: async (payload:any,id: number): Promise<any> =>
         await axios.post( "http://localhost:8080/AuthService/auth/route-configs/"+`${id}/add-child`, payload),
 

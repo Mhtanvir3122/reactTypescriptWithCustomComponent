@@ -95,13 +95,13 @@ const TypeBranchForm = ({
                 />
               </div>
               <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6 ">
-                {/* <SearchableSelect
+                <SearchableSelect
                   setValue={setValue}
                   options={[{ id: "1", name: '4' }, { id: "ff", name: 'fff' }]}
                   onChange={() => { }}
                   fieldName="rolesf"
                   isMulti={false}
-                /> */}
+                />
                 {/* <SearchableSelect
                   setValue={setValue}
                   options={[{ id: "1", name: '4' }, { id: "ff", name: 'fff' }]}

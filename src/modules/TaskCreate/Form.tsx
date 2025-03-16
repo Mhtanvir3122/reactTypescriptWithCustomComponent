@@ -8,6 +8,7 @@ import DrawerFooter from "../../components/Drawer/DrawerFooter";
 import Button from "../../components/UI/button/Button";
 import TextArea from "../../components/UI/input/textArea";
 import Input2 from "../../components/UI/input/Input2";
+import SearchableSelect from "../../components/UI/Select/new";
 
 interface IRoleForm {
   isOpen: boolean;
@@ -30,22 +31,22 @@ const RoleForm = ({
     handleSubmit,
     reset,
     getValues,
-    control,watch,
+    control, watch,
     setValue,
     formState: { errors },
   } = useForm();
 
   useEffect(() => {
     if (isOpen && updateData && !updateData?.menu) {
-      
+
       reset({
         ...updateData
       });
-    } else reset({  });
+    } else reset({});
 
     // eslint-disable-next-line
   }, [isOpen, updateData, reset]);
-  
+
 
   return (
     <Drawer
@@ -60,59 +61,73 @@ const RoleForm = ({
           <div className="row">
             <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
               <Input2
-                register={register("link",)}
-                label="link"
+                register={register("name",)}
+                label="Task Name"
                 type="text"
                 // value={"link"}
-                onValueChange={(value) => setValue("link", value)}
-                placeholder="Enter User link"
+                onValueChange={(value) => setValue("name", value)}
+                placeholder="Enter Task Name"
                 inputStyle={{
                   padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
                   minWidth: "100%"
                 }}
+
 
               />
 
             </div>
             <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
-              <Input2
-                register={register("section",)}
-                label="section"
-                type="text"
-                // value={"section"}
-                onValueChange={(value) => setValue("section", value)}
-                placeholder="Enter User section"
-                inputStyle={{
-                  padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
-                  minWidth: "100%"
-                }}
-
+              <SearchableSelect
+                setValue={setValue}
+                options={[{ id: "1", name: 'HIGH' }, { id: "2", name: 'LOW' }]}
+                onChange={(e) => {setValue('priority',e?.label) }}
+                fieldName="priority"
+                isMulti={false}
+                label='Priority'
+                isReq={true}
+                errors={errors}
+                defaultValue={updateData?.priority === "HIGH" ? { id: "1", name: 'HIGH' } : updateData?.priority === "LOW" ? { id: "2", name: 'LOW' }:null}
               />
 
             </div>
-            
+
+
             <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
-              <Input2
-                register={register("icon",)}
-                label="icon"
-                type="text"
-                // value={"icon"}
-                onValueChange={(value) => setValue("icon", value)}
-                placeholder="Enter User icon"
+              {/* <SearchableSelect
+                  setValue={setValue}
+                  options={[{ id: "1", name: 'TODO' }, { id: "2", name: 'IN_PROGRESS' },{ id: "3", name: 'EXPIRED' }, { id: "4", name: 'COMPLETED' }]}
+                  onChange={() => { }}
+                  fieldName="status"
+                  isMulti={false}
+                  label='Status'
+                  isReq={true}
+                  errors={errors}
+                  /> */}
+
+              <TextArea
+                label="Description"
+                // onValueChange={(e) => console.log(e,"llll")}
+                placeholder="Enter Description"
                 inputStyle={{
-                  padding: "8px", width: "100%", maxWidth: "100%", // Caps the width
-                  minWidth: "100%"
+                  width: "100%",
+                  maxWidth: "100%",
+                  minWidth: "100%",
+                  minHeight: "100px",
+                  height: "100px",
                 }}
 
+                register={register("description", { required: "This field is required" })} // Required validation
+                error={errors?.description?.message}
+                isRequired={true}
               />
 
             </div>
 
-          
-          
 
-          </div>        
-          </DrawerBody>
+
+
+          </div>
+        </DrawerBody>
 
         <DrawerFooter>
           <div className="d-flex gap-3 justify-content-end">

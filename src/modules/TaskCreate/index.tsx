@@ -42,7 +42,7 @@ const TaskCreate = () => {
 
   const getEmployeeList = () => {
 
-    ReportService.routeGetPost({ keyword: searchKey })
+    ReportService.tsskList({ keyword: searchKey })
       .then((resp) => {
         setData(resp);
       })
@@ -57,11 +57,10 @@ const TaskCreate = () => {
 
 
   const onSubmit = (e: any) => {
-    delete e.permissionRole
-    delete e.id
+    e.status = "TODO"
 
-    updatedData?.menu ?
-      ReportService?.routeConfigUpdate({ children: [e], ...e }, updatedData?.id).then((resp) => {
+    updatedData?.edit ?
+      ReportService?.rtaskUpdate(updatedData?.id, e).then((resp) => {
         //  getEmployeeList();
         onDrawerClose()
       })
@@ -69,38 +68,18 @@ const TaskCreate = () => {
         })
         .finally(() => {
           setLoading(false);
-        }) :
-      updatedData?.edit ?
-        ReportService?.routeConfigUpdate2(updatedData?.id, e).then((resp) => {
-          //  getEmployeeList();
-          onDrawerClose()
         })
-          .catch((err) => {
-          })
-          .finally(() => {
-            setLoading(false);
-          }) :
-        updatedData?.subMenu ?
-          ReportService.routeConfigUpdatedd(e, updatedData?.id).then((resp) => {
-            //  getEmployeeList();
-            onDrawerClose()
-          })
-            .catch((err) => {
-            })
-            .finally(() => {
-              setLoading(false);
-            })
-          :
-          ReportService.routeConfigSave({ ...e })
-            .then((resp) => {
-              onDrawerClose()
+      :
+      ReportService.tsskCreate({ ...e,priority:e?.priority?.label })
+        .then((resp) => {
+          onDrawerClose()
 
-            })
-            .catch((err) => {
-            })
-            .finally(() => {
-              setLoading(false);
-            })
+        })
+        .catch((err) => {
+        })
+        .finally(() => {
+          setLoading(false);
+        })
 
 
   }
@@ -139,7 +118,7 @@ const TaskCreate = () => {
           <h2>  Task List</h2>
           <hr />
           <div className="row ">
-            <div className="col-10 ">          
+            <div className="col-10 ">
               <SearchBox searchKey={setSearchKey} />
             </div>
             <div className="col-2  d-flex justify-content-center" >
