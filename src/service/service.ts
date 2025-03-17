@@ -100,6 +100,11 @@ taskUpdate: async (id: number,payload:any): Promise<any> =>
 taskDelete: async (id: number): Promise<any> =>
     await axios.delete( "http://localhost:8080/service2/tasks/task-delete/"+`${id}`),
 
+taskWiseStatusCount: async (): Promise<any> =>
+    await axios.get( "http://localhost:8080/service2/tasks/status-count"),
+
+
+
 getAgentsByFign: async (): Promise<any> =>
     await axios.get( "http://localhost:8080/service2/tasks/agents"),
 

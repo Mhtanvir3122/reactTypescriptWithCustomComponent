@@ -1,6 +1,7 @@
 import ApexCharts from "apexcharts";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import { ReportService } from "../service/service";
 
 interface ChartState {
   series: { data: number[] }[];
@@ -9,22 +10,32 @@ interface ChartState {
 
 const ApexChart: React.FC = () => {
   const colors: string[] = ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0", "#546E7A", "#26a69a", "#D10CE8"];
+  const [roleData, setRoleData] = useState<{ series: { data: number[] }[]; categories: string[] } | null>(null);
 
+  useEffect(() => {
+    getRoleList();
+  }, []);
+
+  const getRoleList = async () => {
+    try {
+      const resp = await ReportService.taskWiseStatusCount();
+      const transformedData = {
+        series: [{ data: resp?.data?.map((item: any) => item.count) }],
+        categories: resp?.data?.map((item: any) => item.status),
+      };
+      setRoleData(transformedData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Initial State (will update after API call)
   const [state, setState] = useState<ChartState>({
-    series: [
-      {
-        data: [21, 22, 10, 28, 16, 21, 13, 30],
-      },
-    ],
+    series: [{ data: [] }],
     options: {
       chart: {
         height: 350,
         type: "bar",
-        events: {
-          click: function (chart, w, e) {
-            // console.log(chart, w, e);
-          },
-        },
       },
       colors: colors,
       plotOptions: {
@@ -34,22 +45,14 @@ const ApexChart: React.FC = () => {
         },
       },
       dataLabels: {
-        enabled: false,
+        enabled: true,
+        
       },
       legend: {
         show: false,
       },
       xaxis: {
-        categories: [
-          ["John", "Doe"],
-          ["Joe", "Smith"],
-          ["Jake", "Williams"],
-          "Amber",
-          ["Peter", "Brown"],
-          ["Mary", "Evans"],
-          ["David", "Wilson"],
-          ["Lily", "Roberts"],
-        ],
+        categories: [],
         labels: {
           style: {
             colors: colors,
@@ -59,6 +62,23 @@ const ApexChart: React.FC = () => {
       },
     },
   });
+
+  // Update State When roleData Changes
+  useEffect(() => {
+    if (roleData) {
+      setState((prevState) => ({
+        ...prevState,
+        series: roleData.series,
+        options: {
+          ...prevState.options,
+          xaxis: {
+            ...prevState.options.xaxis,
+            categories: roleData.categories,
+          },
+        },
+      }));
+    }
+  }, [roleData]);
 
   return (
     <div>
