@@ -13,6 +13,8 @@ function Dashboard() {
       {/* <Summary />
       <SaleChart />
       <DashboardTables /> */}
+      <h6>Status Wise Task Count </h6>
+
       <ApexChart />
     </section>
   );

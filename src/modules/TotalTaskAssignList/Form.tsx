@@ -57,7 +57,7 @@ const RoleAssignForm = ({
 
   return (
     <Drawer
-      title={`Role Assign Form`}
+      title={`All My Task(Agent)`}
       isOpen={isOpen}
       handleClose={onClose}
       className="w-md-25 w-xl-25"
@@ -72,17 +72,18 @@ const RoleAssignForm = ({
               <strong>Priority:</strong> {updateData?.priority}
             </div>
 
-            <div className="col-lg-4 col-md-12 col-sm-12 ">
-              <strong>Status:</strong> {updateData?.status}
-            </div>
-            <div className="col-lg-12 col-md-12 col-sm-12">
+          
+            <div className="col-lg-4 col-md-12 col-sm-12">
               <strong>Description:</strong> {updateData?.description}
             </div>
 
 
 
+            <br />
+            <br />
 
-            <hr />
+
+            <hr  className="container"/>
 
 
             <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">

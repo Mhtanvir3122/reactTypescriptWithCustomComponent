@@ -114,7 +114,7 @@ const RoleAssign = () => {
 
       <Card>
         {!isDrawerOpen ? <>
-          <h2>Role Assign List</h2>
+          <h2>Role Assign (Employee)</h2>
 <hr />
           <SearchBox searchKey={setSearchKey} />
           <div className="d-flex justify-content-end mt-2 mb-3">

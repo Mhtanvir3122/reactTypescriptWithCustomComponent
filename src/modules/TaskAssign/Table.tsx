@@ -8,6 +8,7 @@ interface Item {
   status: string;
   description: string;
   createdDate: string;
+  dueDate: string;
   assignedUser:any;
 }
 
@@ -30,8 +31,10 @@ const RoleAssignTable: React.FC<Props> = ({ visibleData, handleEditItem, handleD
                 <th>Status</th>
                 <th>Description</th>
                 <th>Created Date</th>
+                <th>Expire Date</th>
                 <th>Assign Agent</th>
 
+                
     
                 <th style={{ width: 200 }}>Action</th>
               </tr>
@@ -46,7 +49,8 @@ const RoleAssignTable: React.FC<Props> = ({ visibleData, handleEditItem, handleD
                     <td className="border p-2">{item.priority}</td>
                     <td className="border p-2">{item.status}</td>
                     <td className="border p-2">{item.description}</td>
-                    <td className="border p-2">{item.createdDate}</td>
+                    <td className="border p-2">{item.createdDate?.slice(0,10)}</td>
+                    <td className="border p-2">{item.dueDate?.slice(0,10)}</td>                    
                     <td className="border p-2">{item.assignedUser?.username}</td>
 
     

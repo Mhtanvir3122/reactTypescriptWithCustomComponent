@@ -7,49 +7,44 @@ const sidebarNav = [
     permissionRole: ["USER_ROLE"],
   },
 
-  {
-    link: "/orders",
-    section: "customers",
-    icon: "ph:users-bold",
-    permissionRole: ["USER_ROLE"],
-  },
+  // {
+  //   link: "/orders",
+  //   section: "customers",
+  //   icon: "ph:users-bold",
+  //   permissionRole: ["USER_ROLE"],
+  // },
   
-  {
-    link: "/analytics",
-    section: "analytics",
-    icon: "carbon:analytics",
-    permissionRole: ["ADMIN","USER_ROLE",],
-  },
+  
 
-  {
-    link: "/url-blank",
-    section: "Blank",
-    icon: "ic:round-inventory",
-    permissionRole: ["USER_ROLE", "ADMIN"],
-  },
-  {
-    link: "/",
-    section: "inventory",
-    icon: "ic:round-inventory",
-    permissionRole: ["USER_ROLE", "ADMIN"],
-  },
+  // {
+  //   link: "/url-blank",
+  //   section: "Blank",
+  //   icon: "ic:round-inventory",
+  //   permissionRole: ["USER_ROLE", "ADMIN"],
+  // },
+  // {
+  //   link: "/",
+  //   section: "inventory",
+  //   icon: "ic:round-inventory",
+  //   permissionRole: ["USER_ROLE", "ADMIN"],
+  // },
   {
     link: "/task-create",
     section: "Create Task",
     icon: "ic:round-inventory",
-    permissionRole: ["USER_ROLE", "ADMIN"],
+    permissionRole: [ "ADMIN"],
   },
   {
     link: "/task-assign",
     section: "Assign Task",
     icon: "ic:round-inventory",
-    permissionRole: ["USER_ROLE", "ADMIN"],
+    permissionRole: [ "ADMIN"],
   },
   {
     link: "/ageent-task",
-    section: "Agent Task List",
+    section: "My Task (Agent)",
     icon: "ic:round-inventory",
-    permissionRole: ["USER_ROLE", "ADMIN"],
+    permissionRole: ["AGENT"],
   },
   
   {
@@ -60,7 +55,7 @@ const sidebarNav = [
     children: [
       {
         link: "/url",
-        section: "Url",
+        section: "Menu Create",
         icon: "solar:accessibility-bold",
         permissionRole: ["ADMIN"],
       },     
@@ -76,11 +71,11 @@ const sidebarNav = [
     section: "Role",
     link: "/",
     icon: "icon-park-outline:transaction-order",
-    permissionRole: ["USER_ROLE"],
+    permissionRole: ["ADMIN"],
     children: [
       {
         link: "/role",
-        section: "Role",
+        section: "Role Create",
         icon: "solar:accessibility-bold",
         permissionRole: ["USER_ROLE"],
       },     
@@ -91,6 +86,12 @@ const sidebarNav = [
         permissionRole: ["USER_ROLE"],
       }
     ],
+  },
+  {
+    link: "/analytics",
+    section: "Chat",
+    icon: "carbon:analytics",
+    permissionRole: ["ADMIN","USER_ROLE",],
   },
 ];
 

@@ -136,7 +136,7 @@ const URL = () => {
 
       <Card>
         {!isDrawerOpen ? <>
-          <h2>Menu Create List</h2>
+          <h2>Menu Create</h2>
           <hr />
           <div className="row ">
             <div className="col-10 ">          

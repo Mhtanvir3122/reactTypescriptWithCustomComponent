@@ -44,7 +44,7 @@ const TaskAssign = () => {
   };
 
   useEffect(() => {
-    getRoleList ();
+    getRoleList();
 
   }, []);
 
@@ -61,22 +61,22 @@ const TaskAssign = () => {
   };
 
   const onSubmit = (e: any) => {
-    
-    ReportService.taskAssign(  updatedData?.id,e?.agent?.value  )
+
+    ReportService.taskAssign(updatedData?.id, e?.agent?.value)
       .then((resp) => {
 
         getEmployeeList();
-        
+
       })
       .catch((err) => {
-        alert(err?"All Agent Are Busy!":null);
+        alert(err ? "All Agent Are Busy!" : null);
 
 
       })
       .finally(() => {
         setLoading(false);
       });
-    
+
 
     onDrawerClose();
 
@@ -117,8 +117,8 @@ const TaskAssign = () => {
 
       <Card>
         {!isDrawerOpen ? <>
-          <h2>Role Assign List</h2>
-<hr />
+          <h2>Task Assign (Agent) </h2>
+          <hr />
           <SearchBox searchKey={setSearchKey} />
           <div className="d-flex justify-content-end mt-2 mb-3">
             {/* <Button color="primary" onClick={() => setIsDrawerOpen(true)}>

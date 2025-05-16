@@ -80,6 +80,7 @@ const RoleForm = ({
             </div>
             <div className="col-xl-6 col-md-6 col-sm-12 col-lg-6">
               <SearchableSelect
+              register={register}
                 setValue={setValue}
                 options={[{ id: "1", name: 'HIGH' }, { id: "2", name: 'LOW' }]}
                 onChange={(e) => { setValue('priority', e?.label) }}
@@ -98,7 +99,7 @@ const RoleForm = ({
             <div className="d-flex gap-2 align-items-center">
               <div className="w-100">
                 <DatePicker
-                  label="Task End date"
+                  label="Task Expire date"
                   register={register("dueDate", { required: "Date is required" })}
                   error={errors.dueDate?.message}
                   isRequired={true}

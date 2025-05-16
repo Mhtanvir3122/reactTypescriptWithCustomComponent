@@ -8,6 +8,7 @@ interface Item {
   status: string;
   description: string;
   createdDate: string;
+  dueDate:string;
   assignedUser:any;
 }
 
@@ -30,7 +31,7 @@ const RoleAssignTable: React.FC<Props> = ({ visibleData, handleEditItem, handleD
                 <th>Status</th>
                 <th>Description</th>
                 <th>Created Date</th>
-                <th>Assign Agent</th>
+                <th>Expire Date</th>
 
     
                 <th style={{ width: 200 }}>Action</th>
@@ -46,8 +47,8 @@ const RoleAssignTable: React.FC<Props> = ({ visibleData, handleEditItem, handleD
                     <td className="border p-2">{item.priority}</td>
                     <td className="border p-2">{item.status}</td>
                     <td className="border p-2">{item.description}</td>
-                    <td className="border p-2">{item.createdDate}</td>
-                    <td className="border p-2">{item.assignedUser?.username}</td>
+                    <td className="border p-2">{item.createdDate?.slice(0,10)}</td>
+                    <td className="border p-2">{item.dueDate?.slice(0,10)}</td>   
 
     
     
@@ -58,23 +59,18 @@ const RoleAssignTable: React.FC<Props> = ({ visibleData, handleEditItem, handleD
                         className="d-flex justify-content-center"
                         style={{ marginTop: "10px" }}
                       >
+                 
                         <button
                           onClick={() => handleEditItem({ ...item, edit: true })}
-                          style={{ marginRight: "10px", padding: "5px 10px" }}
-                        >
-                          Task Assign
-                        </button>
-                        {/* <button
-                          onClick={() => handleDeleteItem(Number(item.id))}
                           style={{
                             padding: "5px 10px",
-                            backgroundColor: "#f44336",
+                            backgroundColor: "green",
                             color: "white",
                             border: "none",
                           }}
                         >
-                          Delete <Icon icon="delete" />
-                        </button> */}
+                          {"-->>"} <Icon icon="delete" />
+                        </button>
                       </div>
                     </td>
     

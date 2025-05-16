@@ -107,7 +107,7 @@ const Role = () => {
 
       <Card>
         {!isDrawerOpen ? <>
-          <h2>Role List</h2>
+          <h2>Role Create</h2>
           <hr />
           <div className="d-flex gap-4">
             <div className="w-100">
