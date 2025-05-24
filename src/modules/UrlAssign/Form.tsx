@@ -152,7 +152,7 @@ const RoleForm = ({
               defaultValue={updateData?.permissionRole
               } // Preloading previous selection
               isMulti
-              isReq={true}
+              // isReq={true}
               register={register}
               errors={errors}
               label="Roles"

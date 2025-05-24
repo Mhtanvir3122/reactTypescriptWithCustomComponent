@@ -6,28 +6,6 @@ const sidebarNav = [
     text: "Dashboard",
     permissionRole: ["USER_ROLE"],
   },
-
-  // {
-  //   link: "/orders",
-  //   section: "customers",
-  //   icon: "ph:users-bold",
-  //   permissionRole: ["USER_ROLE"],
-  // },
-  
-  
-
-  // {
-  //   link: "/url-blank",
-  //   section: "Blank",
-  //   icon: "ic:round-inventory",
-  //   permissionRole: ["USER_ROLE", "ADMIN"],
-  // },
-  // {
-  //   link: "/",
-  //   section: "inventory",
-  //   icon: "ic:round-inventory",
-  //   permissionRole: ["USER_ROLE", "ADMIN"],
-  // },
   {
     link: "/task-create",
     section: "Create Task",

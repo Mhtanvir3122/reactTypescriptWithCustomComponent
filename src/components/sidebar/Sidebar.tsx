@@ -9,6 +9,7 @@ import LoginContext from "../../store/loginContext";
 import { Icon } from "@iconify/react";
 import classes from "./Sidebar.module.scss";
 import ACLWrapper from "../ACL/Acl";
+import { ReportService } from "../../service/service";
 
 function Sidebar() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -51,6 +52,29 @@ function Sidebar() {
     }
   };
 
+
+  const [loading, setLoading] = useState<boolean>(true);
+  const [data, setData] = useState<any>();
+ useEffect(() => {
+    getEmployeeList();
+
+  }, []);
+  const getEmployeeList = () => {
+
+    ReportService.routeGetPost({ keyword: '' })
+      .then((resp) => {
+        setData(resp?.data);
+      })
+      .catch((err) => {
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  console.log(data);
+  const data2 =data
+  
   return (
     <div
       className={`${classes.sidebar} ${!sidebarCtx.isOpen && classes.sidebar_close
@@ -60,46 +84,46 @@ function Sidebar() {
         {/* <img src={images.logo} alt="digikalaw" /> */}
       </div>
       <div className={classes.sidebar__menu}>
-        {sidebarNav.map((nav: any, index: any) => (
-          <ACLWrapper key={`nav-${index}`} visibleToRoles={nav.permissionRole}>
+        {data2?.map((nav: any, index: any) => (
+          <ACLWrapper key={`nav-${index}`} visibleToRoles={nav?.permissionRole?.map((e:any)=>e?.name)}>
             <div>
               <div
                 className={`${classes.sidebar__menu__item} ${activeIndex === index && classes.active
                   }`}
-                onClick={() => handleClick(index, nav.link, nav.children?.length)}
+                onClick={() => handleClick(index, nav?.link, nav?.children?.length)}
               >
                 <div className={classes.sidebar__menu__item__icon}>
-                  <Icon icon={nav.icon} />
+                  <Icon icon={nav?.icon} />
                 </div>
                 <div className={classes.sidebar__menu__item__txt}>
-                  {t(nav.section)}
+                  {t(nav?.section)}
                 </div>
-                {nav.children && (
+                {nav?.children && (
                   <div className={classes.sidebar__menu__item__arrow}>
                     <Icon icon={openSubmenu === index ? "mdi:chevron-down" : "mdi:chevron-right"} />
                   </div>
                 )}
               </div>
 
-              {nav.children && openSubmenu === index && (
+              {nav?.children && openSubmenu === index && (
                 <div className={classes.sidebar__submenu}>
-                  {nav.children.map((subNav: any, subIndex: any) => (
-                    <ACLWrapper key={`subNav-${subIndex}`} visibleToRoles={subNav.permissionRole}>
+                  {nav?.children.map((subNav: any, subIndex: any) => (
+                    <ACLWrapper key={`subNav-${subIndex}`} visibleToRoles={subNav?.permissionRole?.map((e:any)=>e?.name)}>
                       <div
                         className={`${classes.sidebar__submenu__item} ${activeIndex2 === `${index}-${subIndex}` ? classes.active : ''
                           }`}
                         onClick={() => {
                           setActiveIndex2(`${index}-${subIndex}`);
-                          navigate(subNav.link);
+                          navigate(subNav?.link);
                         }}
                       >
                         <div className={`${classes.sidebar__submenu__item__txt} ${activeIndex2 === `${index}-${subIndex}` ? classes.activeText : ''}`}>
 
                           <div className="d-flex">
                             <div className={classes.sidebar__menu__item__icon}>
-                              <Icon icon={subNav.icon} />
+                              <Icon icon={subNav?.icon} />
                             </div>
-                            {t(subNav.section)}
+                            {t(subNav?.section)}
                           </div>
                         </div>
                       </div>
