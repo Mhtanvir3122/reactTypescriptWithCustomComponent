@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import LoadingSpinner from "./components/UI/loadingSpinner/LoadingSpinner";
 import AuthLayout from "./layout/AuthLayout";
 import MainLayout from "./layout/MainLayout";
@@ -25,7 +25,6 @@ const BlankPage = React.lazy(() => import("./pages/BlankPage"));
 const Login = React.lazy(() => import("./pages/Login"));
 
 function App() {
-
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingSpinner />}>
@@ -40,21 +39,16 @@ function App() {
               <Route path="/url" element={<URL />} />
               <Route path="/url-assign" element={<UrlAssign />} />
               <Route path="/url-blank" element={<BlankPage />} />
-
-
-
               <Route path="/task-create" element={<TaskCreate />} />
               <Route path="/task-assign" element={<TaskAssign />} />
               <Route path="/ageent-task" element={<TaskAssignAgentList />} />
 
-              
-
+              <Route path="/course" element={<TaskAssignAgentList />} />
             </Route>
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/forget-pass" element={<ForgotPass />} />
           <Route path="/reg" element={<Registration />} />
-
 
           <Route path="*" element={<NotFound />} />
         </Routes>
